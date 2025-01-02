@@ -7,6 +7,7 @@ import SimpleInput from "../SimpleInput";
 import TextAreaInput from "../TextAreaInput";
 import { useNavigate } from "react-router-dom";
 import { useCategories } from "../../hooks/category/useCategory";
+import { BASE_URL } from "../../api/base";
 
 const CreateSubCategory: FC = () => {
   const navigate = useNavigate();
@@ -77,13 +78,13 @@ const CreateSubCategory: FC = () => {
     }
     try {
       // Corrected URL here
-      const response = await fetch("http://localhost:3000/subcategories", {
+      const response = await fetch(`${BASE_URL}subcategories`, {
         method: "POST",
         body: formDataToSend,
       });
       if (response.ok) {
         setSuccess("Subcategory created successfully!");
-        mutate("http://localhost:3000/subcategories");
+        mutate(`${BASE_URL}subcategories`);
         setFormData({
           title_tm: "",
           title_ru: "",

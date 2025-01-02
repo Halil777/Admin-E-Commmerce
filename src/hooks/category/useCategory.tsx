@@ -1,16 +1,18 @@
 import useSWR from "swr";
+import { BASE_URL } from "../../api/base";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) =>
+  fetch(url).then((res) => {
+    if (!res.ok) throw new Error("Failed to fetch data");
+    return res.json();
+  });
 
 export const useCategories = () => {
-  const { data, error, mutate } = useSWR(
-    "http://localhost:3000/category",
-    fetcher
-  );
+  const { data, error, mutate } = useSWR(`${BASE_URL}category`, fetcher);
 
   const deleteCategory = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/category/${id}`, {
+      const response = await fetch(`${BASE_URL}category/${id}`, {
         method: "DELETE",
       });
 
@@ -18,12 +20,14 @@ export const useCategories = () => {
         throw new Error("Failed to delete category");
       }
 
-      // Optimistically update the local data after deletion
-      mutate((currentData: any) =>
-        currentData.filter((category: any) => category.id !== id)
+      // Optimistically update the cache after deletion
+      mutate(
+        (currentData: any) =>
+          currentData?.filter((category: any) => category.id !== id),
+        false // Ensure cache isn't revalidated until explicitly needed
       );
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting category:", error);
       throw error;
     }
   };

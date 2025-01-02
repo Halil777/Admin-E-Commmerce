@@ -18,7 +18,7 @@ const SelectCategories: FC<SelectCategoriesProps> = ({ data, onChange }) => {
   const { categories, isLoading: isCategoriesLoading } = useCategories();
   const { subcategories, isLoading: isSubcategoriesLoading } =
     useSubcategories();
-  const { segment, isLoading: isSegmentLoading } = useSegment();
+  const { segments, isLoading: isSegmentLoading } = useSegment();
   const { brands, isLoading: isBrandsLoading } = useBrand();
 
   return (
@@ -108,7 +108,7 @@ const SelectCategories: FC<SelectCategoriesProps> = ({ data, onChange }) => {
             ) : (
               <>
                 <option value="">Select a segment</option>
-                {segment?.map((seg: any) => (
+                {segments?.map((seg: any) => (
                   <option key={seg.id} value={seg.id}>
                     {seg.title_en}
                   </option>

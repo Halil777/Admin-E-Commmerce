@@ -6,6 +6,7 @@ import Sidebar from "../../Sidebar";
 import { AiOutlineSave } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import NotRequiredDatas from "./NotRequiredDatas";
+import { BASE_URL } from "../../../api/base";
 
 const CreateProduct: FC = () => {
   const navigate = useNavigate();
@@ -125,7 +126,7 @@ const CreateProduct: FC = () => {
       });
     }
 
-    const response = await fetch("http://localhost:3000/products", {
+    const response = await fetch(`${BASE_URL}products`, {
       method: "POST",
       body: form,
     });

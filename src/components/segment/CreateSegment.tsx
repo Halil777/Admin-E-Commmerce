@@ -7,6 +7,7 @@ import SimpleInput from "../SimpleInput";
 import TextAreaInput from "../TextAreaInput";
 import { useNavigate } from "react-router-dom";
 import { useSubcategories } from "../../hooks/subcategory/useSubcategories";
+import { BASE_URL } from "../../api/base";
 
 const CreateSegment: FC = () => {
   const navigate = useNavigate();
@@ -81,13 +82,13 @@ const CreateSegment: FC = () => {
     }
     try {
       // Corrected URL here
-      const response = await fetch("http://localhost:3000/segment", {
+      const response = await fetch(`${BASE_URL}segment`, {
         method: "POST",
         body: formDataToSend,
       });
       if (response.ok) {
         setSuccess("Segment created successfully!");
-        mutate("http://localhost:3000/segment");
+        mutate(`${BASE_URL}segment`);
         setFormData({
           title_tm: "",
           title_ru: "",

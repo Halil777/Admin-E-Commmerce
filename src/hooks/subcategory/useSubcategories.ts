@@ -1,41 +1,46 @@
 import useSWR, { mutate } from "swr";
+import { BASE_URL } from "../../api/base"; // Import dynamic base URL
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// Fetcher function with error handling
+const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch: ${response.statusText}`);
+  }
+  return response.json();
+};
 
 export const useSubcategories = () => {
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:3000/subcategories",
-    fetcher
-  );
+  const { data, error } = useSWR(`${BASE_URL}subcategories`, fetcher);
 
   const deleteSubcategory = async (id: string) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/subcategories/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${BASE_URL}subcategories/${id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         throw new Error("Failed to delete subcategory");
       }
 
-      // Optimistically update the local data after deletion
-      mutate((currentData: any) =>
-        currentData.filter((subcategory: any) => subcategory.id !== id)
+      // Optimistically update the cache by removing the deleted subcategory
+      mutate(
+        `${BASE_URL}subcategories`, // Specify the key for SWR cache
+        (currentData: any) =>
+          currentData?.filter((subcategory: any) => subcategory.id !== id),
+        false // Avoid immediate revalidation
       );
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting subcategory:", error);
       throw error;
     }
   };
 
   return {
-    subcategories: data,
-    isLoading,
-    isError: !!error,
-    mutate,
-    deleteSubcategory,
+    subcategories: data, // Return fetched subcategories
+    isLoading: !error && !data, // Loading is true when no error or data yet
+    isError: !!error, // Convert error to boolean
+    mutate, // Expose SWR mutate for custom revalidation
+    deleteSubcategory, // Expose delete function
   };
 };

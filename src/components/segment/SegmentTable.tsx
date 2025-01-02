@@ -5,7 +5,7 @@ import { useSegment } from "../../hooks/segment/useSegment";
 import DeleteSegment from "./DeleteSegment";
 
 const SegmentTable: FC = () => {
-  const { segment, isLoading, isError, deleteSegment } = useSegment();
+  const { segments, isLoading, isError, deleteSegment } = useSegment();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSegmentId, setSelectedSegmentId] = useState<number | null>(
     null
@@ -42,7 +42,7 @@ const SegmentTable: FC = () => {
       </div>
     );
 
-  if (!segment || segment.length === 0)
+  if (!segments || segments.length === 0)
     return (
       <div className="dark:text-whiteSecondary">No segments available</div>
     );
@@ -86,7 +86,7 @@ const SegmentTable: FC = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
-          {segment.map((item: any) => (
+          {segments.map((item: any) => (
             <tr key={item.id}>
               <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                 <div className="flex items-center gap-x-4">

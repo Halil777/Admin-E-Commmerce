@@ -3,16 +3,19 @@ import { InputWithLabel, Sidebar, SimpleInput, TextAreaInput } from "..";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+// Get BASE_URL from environment variables
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 // Fetch brand by ID
 const fetchBrandById = async (brandId: string) => {
-  const response = await fetch(`http://localhost:3000/brands/${brandId}`);
+  const response = await fetch(`${BASE_URL}brands/${brandId}`);
   if (!response.ok) throw new Error("Failed to fetch brand");
   return response.json();
 };
 
 // Update brand by ID
 const updateBrand = async (brandId: string, data: FormData) => {
-  const response = await fetch(`http://localhost:3000/brands/${brandId}`, {
+  const response = await fetch(`${BASE_URL}brands/${brandId}`, {
     method: "PATCH",
     body: data,
   });

@@ -60,14 +60,16 @@ const CreateBrand = () => {
       formDataToSend.append("file", formData.imageUrl); // Append the file directly
     }
 
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
     try {
-      const response = await fetch("http://localhost:3000/brands", {
+      const response = await fetch(`${BASE_URL}brands`, {
         method: "POST",
         body: formDataToSend, // Send FormData, not JSON
       });
 
       if (response.ok) {
-        mutate("http://localhost:3000/brands");
+        mutate(`${BASE_URL}brands`);
         setFormData({
           title_tm: "",
           title_ru: "",

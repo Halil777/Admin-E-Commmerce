@@ -2,17 +2,18 @@ import { AiOutlineSave } from "react-icons/ai";
 import { InputWithLabel, Sidebar, SimpleInput, TextAreaInput } from "..";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../../api/base";
 
 // Fetch category by ID
 const fetchCategoryById = async (categoryId: string) => {
-  const response = await fetch(`http://localhost:3000/category/${categoryId}`);
+  const response = await fetch(`${BASE_URL}category/${categoryId}`);
   if (!response.ok) throw new Error("Failed to fetch category");
   return response.json();
 };
 
 // Update category by ID
 const updateCategory = async (categoryId: string, data: FormData) => {
-  const response = await fetch(`http://localhost:3000/category/${categoryId}`, {
+  const response = await fetch(`${BASE_URL}category/${categoryId}`, {
     method: "PATCH",
     body: data, // Send FormData
   });

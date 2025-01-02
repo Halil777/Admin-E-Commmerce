@@ -6,6 +6,7 @@ import InputWithLabel from "../InputWithLabel";
 import SimpleInput from "../SimpleInput";
 import TextAreaInput from "../TextAreaInput";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../api/base";
 
 const CreateCategory = () => {
   const navigate = useNavigate();
@@ -62,13 +63,13 @@ const CreateCategory = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/category", {
+      const response = await fetch(`${BASE_URL}category`, {
         method: "POST",
         body: formDataToSend, // Send FormData, not JSON
       });
 
       if (response.ok) {
-        mutate("http://localhost:3000/category");
+        mutate(`${BASE_URL}category`);
         setFormData({
           title_tm: "",
           title_ru: "",

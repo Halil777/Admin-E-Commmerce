@@ -97,26 +97,26 @@ const SubcategoryTable: FC = () => {
                     <span className="text-sm text-gray-500">No Image</span>
                   )}
                   <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
-                    {item.title_tm}
+                    {item.title_tm.slice(0, 20)}...
                   </div>
                 </div>
               </td>
               <td className="py-4 pl-0 table-cell pr-8">
                 <div className="flex gap-x-3">
                   <div className="text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
-                    {item.title_en}
+                    {item.title_en.slice(0, 20)}...
                   </div>
                 </div>
               </td>
               <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
                 <div className="flex items-center gap-x-2 justify-start">
                   <div className="dark:text-whiteSecondary text-blackPrimary block">
-                    {item.title_ru}
+                    {item.title_ru.slice(0, 20)}...
                   </div>
                 </div>
               </td>
               <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell lg:pr-20">
-                {item.desc_tm}
+                {item.desc_tm.slice(0, 20)}...
               </td>
               <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
                 <div className="flex gap-x-1 justify-end">

@@ -2,17 +2,18 @@ import { AiOutlineSave } from "react-icons/ai";
 import { InputWithLabel, Sidebar, SimpleInput, TextAreaInput } from "..";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../../api/base";
 
 // Fetch segment by ID
 const fetchSegmentById = async (segmentId: string) => {
-  const response = await fetch(`http://localhost:3000/segment/${segmentId}`);
+  const response = await fetch(`${BASE_URL}segment/${segmentId}`);
   if (!response.ok) throw new Error("Failed to fetch segment");
   return response.json();
 };
 
 // Update segment by ID
 const updateSegment = async (segmentId: string, data: FormData) => {
-  const response = await fetch(`http://localhost:3000/segment/${segmentId}`, {
+  const response = await fetch(`${BASE_URL}segment/${segmentId}`, {
     method: "PATCH",
     body: data,
   });
@@ -24,7 +25,7 @@ const updateSegment = async (segmentId: string, data: FormData) => {
 };
 
 const fetchSubcategories = async () => {
-  const response = await fetch(`http://localhost:3000/subcategories`);
+  const response = await fetch(`${BASE_URL}subcategories`);
   if (!response.ok) {
     throw new Error("Failed to fetch subcategories");
   }
