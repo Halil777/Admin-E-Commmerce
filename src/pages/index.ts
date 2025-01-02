@@ -6,7 +6,7 @@ export { default as Subcategories } from "./subcategories/Subcategories";
 export { default as Orders } from "./Orders";
 export { default as Users } from "./Users";
 export { default as Reviews } from "./Reviews";
-export { default as CreateProduct } from "../components/product/CreateProduct";
+export { default as CreateProduct } from "../components/product/create/CreateProduct";
 export { default as CreateCategory } from "../components/category/CreateCategory";
 export { default as CreateOrder } from "./CreateOrder";
 export { default as CreateUser } from "./CreateUser";

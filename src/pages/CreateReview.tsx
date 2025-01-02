@@ -49,15 +49,21 @@ const CreateReview = () => {
 
               <div className="mt-4 flex flex-col gap-5">
                 <InputWithLabel label="Product to rate">
-                  <SimpleInput type="text" placeholder="Search a product to rate..." />
+                  <SimpleInput
+                    type="text"
+                    placeholder="Search a product to rate..."
+                  />
                 </InputWithLabel>
 
                 <InputWithLabel label="Rating">
-                  <SimpleInput type="number" placeholder="Enter a rating (1-5)..." />
+                  <SimpleInput
+                    type="number"
+                    placeholder="Enter a rating (1-5)..."
+                  />
                 </InputWithLabel>
 
                 <InputWithLabel label="Review Text">
-                  <TextAreaInput placeholder="Enter review text..."  />
+                  <TextAreaInput placeholder="Enter review text..." />
                 </InputWithLabel>
               </div>
             </div>

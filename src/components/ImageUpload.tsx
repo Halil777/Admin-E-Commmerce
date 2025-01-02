@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 
-interface ImageUploadProps {
-  onUpload: (url: string) => void;
-}
-
-const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
+const ImageUpload: React.FC = () => {
   const [uploading, setUploading] = useState(false);
 
   const handleFileChange = async (
@@ -19,7 +15,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:3001/upload", {
+      const response = await fetch("http://localhost:3000/upload", {
         method: "POST",
         body: formData,
       });
@@ -27,9 +23,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUpload }) => {
       if (!response.ok) {
         throw new Error("File upload failed.");
       }
-
-      const data = await response.json();
-      onUpload(data.url); // Assuming backend returns the URL of the uploaded image
     } catch (error) {
       console.error("File upload failed:", error);
     } finally {

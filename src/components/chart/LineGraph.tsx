@@ -1,4 +1,4 @@
-import { Chart, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,14 +25,14 @@ const LineGraph = () => {
   const { darkMode } = useAppSelector((state) => state.darkMode);
   if (darkMode) {
     ChartJS.defaults.color = "#fff";
-    ChartJS.defaults.backgroundColor = '#fff';
-    ChartJS.defaults.borderColor = '#fff';
-    ChartJS.defaults.color = '#fff';
+    ChartJS.defaults.backgroundColor = "#fff";
+    ChartJS.defaults.borderColor = "#fff";
+    ChartJS.defaults.color = "#fff";
   } else {
     ChartJS.defaults.color = "#000";
-    ChartJS.defaults.backgroundColor = '#000';
-    ChartJS.defaults.borderColor = '#000';
-    ChartJS.defaults.color = '#000';
+    ChartJS.defaults.backgroundColor = "#000";
+    ChartJS.defaults.borderColor = "#000";
+    ChartJS.defaults.color = "#000";
   }
 
   const options = {};

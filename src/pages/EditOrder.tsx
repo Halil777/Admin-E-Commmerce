@@ -7,11 +7,10 @@ import {
   TextAreaInput,
   WhiteButton,
 } from "../components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const EditOrder = () => {
-
-  const [ inputObject, setInputObject ] = useState({
+  const [inputObject, setInputObject] = useState({
     customerName: "Brent",
     customerLastName: "Fesi",
     companyName: "NoName Inc.",
@@ -70,7 +69,12 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a customer name..."
                     value={inputObject.customerName}
-                    onChange={(e) => setInputObject({ ...inputObject, customerName: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        customerName: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
@@ -79,7 +83,12 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a customer lastname..."
                     value={inputObject.customerLastName}
-                    onChange={(e) => setInputObject({ ...inputObject, customerLastName: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        customerLastName: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
@@ -88,12 +97,27 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a company name..."
                     value={inputObject.companyName}
-                    onChange={(e) => setInputObject({ ...inputObject, companyName: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        companyName: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
                 <InputWithLabel label="Country">
-                  <SimpleInput type="text" placeholder="Enter a country..." value={inputObject.country} onChange={(e) => setInputObject({...inputObject, country: e.target.value})} />
+                  <SimpleInput
+                    type="text"
+                    placeholder="Enter a country..."
+                    value={inputObject.country}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        country: e.target.value,
+                      })
+                    }
+                  />
                 </InputWithLabel>
 
                 <InputWithLabel label="Street and house number">
@@ -101,16 +125,38 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a street and house number..."
                     value={inputObject.streetAndHouseNumber}
-                    onChange={(e) => setInputObject({ ...inputObject, streetAndHouseNumber: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        streetAndHouseNumber: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
                 <InputWithLabel label="City">
-                  <SimpleInput type="text" placeholder="Enter a city..." value={inputObject.city} onChange={(e) => setInputObject({...inputObject, city: e.target.value})} />
+                  <SimpleInput
+                    type="text"
+                    placeholder="Enter a city..."
+                    value={inputObject.city}
+                    onChange={(e) =>
+                      setInputObject({ ...inputObject, city: e.target.value })
+                    }
+                  />
                 </InputWithLabel>
 
                 <InputWithLabel label="Zip code">
-                  <SimpleInput type="text" placeholder="Enter a zip code..." value={inputObject.zipCode} onChange={(e) => setInputObject({...inputObject, zipCode: e.target.value})} />
+                  <SimpleInput
+                    type="text"
+                    placeholder="Enter a zip code..."
+                    value={inputObject.zipCode}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        zipCode: e.target.value,
+                      })
+                    }
+                  />
                 </InputWithLabel>
 
                 <InputWithLabel label="Phone number">
@@ -118,7 +164,12 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a phone number..."
                     value={inputObject.phoneNumber}
-                    onChange={(e) => setInputObject({ ...inputObject, phoneNumber: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        phoneNumber: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
@@ -127,12 +178,26 @@ const EditOrder = () => {
                     type="text"
                     placeholder="Enter a email address..."
                     value={inputObject.emailAddress}
-                    onChange={(e) => setInputObject({ ...inputObject, emailAddress: e.target.value })}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        emailAddress: e.target.value,
+                      })
+                    }
                   />
                 </InputWithLabel>
 
                 <InputWithLabel label="Order notice">
-                  <TextAreaInput placeholder="Enter a order notice..." value={inputObject.orderNotice} onChange={(e) => setInputObject({...inputObject, orderNotice: e.target.value})} />
+                  <TextAreaInput
+                    placeholder="Enter a order notice..."
+                    value={inputObject.orderNotice}
+                    onChange={(e) =>
+                      setInputObject({
+                        ...inputObject,
+                        orderNotice: e.target.value,
+                      })
+                    }
+                  />
                 </InputWithLabel>
               </div>
             </div>
@@ -146,14 +211,29 @@ const EditOrder = () => {
               <div>
                 <div className="mt-4 flex flex-col gap-5">
                   <InputWithLabel label="Search products">
-                    <SimpleInput type="text" placeholder="Search products..." value={inputObject.searchProducts} onChange={(e) => setInputObject({...inputObject, searchProducts: e.target.value})} />
+                    <SimpleInput
+                      type="text"
+                      placeholder="Search products..."
+                      value={inputObject.searchProducts}
+                      onChange={(e) =>
+                        setInputObject({
+                          ...inputObject,
+                          searchProducts: e.target.value,
+                        })
+                      }
+                    />
                   </InputWithLabel>
                   <InputWithLabel label="Quantity">
                     <SimpleInput
                       type="text"
                       placeholder="Enter a quantity..."
                       value={inputObject.quantity}
-                      onChange={(e) => setInputObject({ ...inputObject, quantity: Number(e.target.value) })}
+                      onChange={(e) =>
+                        setInputObject({
+                          ...inputObject,
+                          quantity: Number(e.target.value),
+                        })
+                      }
                     />
                   </InputWithLabel>
                   <WhiteButton
@@ -172,28 +252,51 @@ const EditOrder = () => {
                   <div className="mt-4 flex flex-col gap-5 max-[450px]:items-start">
                     <div className="flex justify-between items-center max-[450px]:flex-col">
                       <div className="flex items-center gap-3 max-[450px]:flex-col">
-                      <img src="/src/assets/tablet (1).jpg" alt="product" className="w-12 h-12" />
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Samsung Galaxy Tab 7</span>
+                        <img
+                          src="/src/assets/tablet (1).jpg"
+                          alt="product"
+                          className="w-12 h-12"
+                        />
+                        <span className="dark:text-whiteSecondary text-blackPrimary">
+                          Samsung Galaxy Tab 7
+                        </span>
                       </div>
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Quantity: 2</span>
+                      <span className="dark:text-whiteSecondary text-blackPrimary">
+                        Quantity: 2
+                      </span>
                     </div>
                     <div className="flex justify-between items-center max-[450px]:flex-col">
                       <div className="flex items-center gap-3  max-[450px]:flex-col">
-                      <img src="/src/assets/tablet (2).jpg" alt="product" className="w-12 h-12" />
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Samsung Galaxy Tab 8</span>
+                        <img
+                          src="/src/assets/tablet (2).jpg"
+                          alt="product"
+                          className="w-12 h-12"
+                        />
+                        <span className="dark:text-whiteSecondary text-blackPrimary">
+                          Samsung Galaxy Tab 8
+                        </span>
                       </div>
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Quantity: 1</span>
+                      <span className="dark:text-whiteSecondary text-blackPrimary">
+                        Quantity: 1
+                      </span>
                     </div>
                     <div className="flex justify-between items-center max-[450px]:flex-col">
                       <div className="flex items-center gap-3  max-[450px]:flex-col">
-                      <img src="/src/assets/tablet (3).jpg" alt="product" className="w-12 h-12" />
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Samsung Galaxy Tab 9</span>
+                        <img
+                          src="/src/assets/tablet (3).jpg"
+                          alt="product"
+                          className="w-12 h-12"
+                        />
+                        <span className="dark:text-whiteSecondary text-blackPrimary">
+                          Samsung Galaxy Tab 9
+                        </span>
                       </div>
-                      <span className="dark:text-whiteSecondary text-blackPrimary">Quantity: 1</span>
+                      <span className="dark:text-whiteSecondary text-blackPrimary">
+                        Quantity: 1
+                      </span>
                     </div>
                   </div>
                 </div>
-
               </div>
               <div className="mt-5">
                 <h3 className="text-2xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
@@ -201,12 +304,20 @@ const EditOrder = () => {
                 </h3>
                 <div className="mt-4 flex flex-col gap-5">
                   <div className="flex justify-between items-center">
-                    <span className="dark:text-whiteSecondary text-blackPrimary">Total products</span>
-                    <span className="dark:text-whiteSecondary text-blackPrimary">4</span>
+                    <span className="dark:text-whiteSecondary text-blackPrimary">
+                      Total products
+                    </span>
+                    <span className="dark:text-whiteSecondary text-blackPrimary">
+                      4
+                    </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="dark:text-whiteSecondary text-blackPrimary">Total price</span>
-                    <span className="dark:text-whiteSecondary text-blackPrimary">$1899</span>
+                    <span className="dark:text-whiteSecondary text-blackPrimary">
+                      Total price
+                    </span>
+                    <span className="dark:text-whiteSecondary text-blackPrimary">
+                      $1899
+                    </span>
                   </div>
                 </div>
               </div>

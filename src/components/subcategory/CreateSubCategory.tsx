@@ -20,7 +20,7 @@ const CreateSubCategory: FC = () => {
     desc_ru: "",
     desc_en: "",
     imageUrl: "" as string | File,
-    categoryId: "",
+    category_id: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const CreateSubCategory: FC = () => {
     const { value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      categoryId: value,
+      category_id: value,
     }));
   };
 
@@ -64,7 +64,6 @@ const CreateSubCategory: FC = () => {
     setLoading(true);
     setError(null);
     setSuccess(null);
-
     const formDataToSend = new FormData();
     formDataToSend.append("title_tm", formData.title_tm);
     formDataToSend.append("title_ru", formData.title_ru);
@@ -72,7 +71,7 @@ const CreateSubCategory: FC = () => {
     formDataToSend.append("desc_tm", formData.desc_tm);
     formDataToSend.append("desc_ru", formData.desc_ru);
     formDataToSend.append("desc_en", formData.desc_en);
-    formDataToSend.append("categoryId", formData.categoryId);
+    formDataToSend.append("category_id", formData.category_id);
     if (formData.imageUrl) {
       formDataToSend.append("file", formData.imageUrl);
     }
@@ -93,7 +92,7 @@ const CreateSubCategory: FC = () => {
           desc_ru: "",
           desc_en: "",
           imageUrl: "",
-          categoryId: "",
+          category_id: "",
         });
         setTimeout(() => {
           navigate("/subcategories");
@@ -194,8 +193,8 @@ const CreateSubCategory: FC = () => {
                   Choose Category
                 </label>
                 <select
-                  name="categoryId"
-                  value={formData.categoryId}
+                  name="category_id"
+                  value={formData.category_id}
                   onChange={handleCategoryChange}
                   className="py-2 px-3 border border-gray-300 rounded"
                 >

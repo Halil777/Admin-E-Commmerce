@@ -20,7 +20,7 @@ const CreateSegment: FC = () => {
     desc_ru: "",
     desc_en: "",
     imageUrl: "" as string | File,
-    subcategoryId: "",
+    subcategory_id: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,11 +40,11 @@ const CreateSegment: FC = () => {
     }));
   };
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
+  const handleSubcategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      subcategory_id: value,
     }));
   };
 
@@ -73,8 +73,8 @@ const CreateSegment: FC = () => {
     formDataToSend.append("desc_ru", formData.desc_ru);
     formDataToSend.append("desc_en", formData.desc_en);
     formDataToSend.append(
-      "subcategoryId",
-      String(parseInt(formData.subcategoryId, 10))
+      "subcategory_id",
+      String(parseInt(formData.subcategory_id, 10))
     );
     if (formData.imageUrl) {
       formDataToSend.append("file", formData.imageUrl);
@@ -96,7 +96,7 @@ const CreateSegment: FC = () => {
           desc_ru: "",
           desc_en: "",
           imageUrl: "",
-          subcategoryId: "",
+          subcategory_id: "",
         });
         setTimeout(() => {
           navigate("/segments");
@@ -195,9 +195,9 @@ const CreateSegment: FC = () => {
                   Choose Subcategory
                 </label>
                 <select
-                  name="subcategoryId"
-                  value={formData.subcategoryId}
-                  onChange={handleCategoryChange}
+                  name="subcategory_id"
+                  value={formData.subcategory_id}
+                  onChange={handleSubcategoryChange}
                   className="py-2 px-3 border border-gray-300 rounded"
                 >
                   <option value="">Select a category</option>

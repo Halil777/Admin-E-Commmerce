@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 
 interface FileProps extends File {
@@ -6,43 +6,60 @@ interface FileProps extends File {
 }
 
 interface ProductImageUploadProps {
-  onImageChange: (files: FileProps[]) => void;
-  files?: FileProps[];
+  onImageChange: (images: File[]) => void;
+  images?: File[];
 }
 
 const ProductImageUpload: React.FC<ProductImageUploadProps> = ({
   onImageChange,
-  files,
+  images = [],
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imagePreviews, setImagePreviews] = useState<FileProps[]>(files || []);
+  const [imagePreviews, setImagePreviews] = useState<FileProps[]>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as FileProps[];
 
+    // Map files and generate previews
     const newFiles = selectedFiles.map((file) => {
       const preview = URL.createObjectURL(file);
-      return Object.assign(file, { preview });
+      return { ...file, preview };
     });
+    const updatedPreviews = [...imagePreviews, ...newFiles];
 
-    setImagePreviews([...imagePreviews, ...newFiles]);
-    onImageChange([...imagePreviews, ...newFiles]);
+    // Update state and notify parent
+    setImagePreviews(updatedPreviews);
+    onImageChange(selectedFiles);
   };
 
   const handleRemoveImage = (index: number) => {
+    // Revoke preview URL and remove image
     const updatedPreviews = imagePreviews.filter((_, i) => i !== index);
+    URL.revokeObjectURL(imagePreviews[index].preview || "");
+
+    // Update state and notify parent
     setImagePreviews(updatedPreviews);
-    onImageChange(updatedPreviews);
+
+    const updatedFiles = images.filter((_, i) => i !== index);
+    onImageChange(updatedFiles);
   };
 
   const handleClick = () => {
     fileInputRef.current?.click();
   };
 
+  useEffect(() => {
+    // Cleanup preview URLs on component unmount
+    return () => {
+      imagePreviews.forEach((file) => URL.revokeObjectURL(file.preview || ""));
+    };
+  }, [imagePreviews]);
+
   return (
     <div>
+      {/* Upload Area */}
       <div
-        className="border-2 border-dashed border-gray-600 dark:border-gray-400 rounded-md p-4 cursor-pointer flex flex-col items-center justify-center hover:border-gray-500 duration-200 "
+        className="border-2 border-dashed border-gray-600 dark:border-gray-400 rounded-md p-4 cursor-pointer flex flex-col items-center justify-center hover:border-gray-500 duration-200"
         onClick={handleClick}
       >
         <svg
@@ -72,11 +89,12 @@ const ProductImageUpload: React.FC<ProductImageUploadProps> = ({
         />
       </div>
 
+      {/* Image Previews */}
       <div className="mt-2 flex flex-wrap gap-2">
         {imagePreviews.map((file, index) => (
           <div key={index} className="relative">
             <img
-              src={file.preview || URL.createObjectURL(file)}
+              src={file.preview}
               alt={`Preview ${index}`}
               className="h-16 w-16 rounded border border-gray-600 object-cover"
             />
