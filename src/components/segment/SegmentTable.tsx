@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HiOutlinePencil, HiOutlineTrash, HiOutlineEye } from "react-icons/hi";
 import { useSegment } from "../../hooks/segment/useSegment";
 import DeleteSegment from "./DeleteSegment";
+import TableSkeleton from "../common/TableSkeleton";
 
 const SegmentTable: FC = () => {
   const { segments, isLoading, isError, deleteSegment } = useSegment();
@@ -35,12 +36,7 @@ const SegmentTable: FC = () => {
       </div>
     );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid border-transparent"></div>
-      </div>
-    );
+  if (isLoading) return <TableSkeleton />;
 
   if (!segments || segments.length === 0)
     return (

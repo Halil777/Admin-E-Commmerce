@@ -11,7 +11,7 @@ export { default as CreateCategory } from "../components/category/CreateCategory
 export { default as CreateOrder } from "./CreateOrder";
 export { default as CreateUser } from "./CreateUser";
 export { default as CreateReview } from "./CreateReview";
-export { default as EditProduct } from "../components/product/EditProduct";
+export { default as EditProduct } from "../components/product/edit/EditProduct";
 export { default as EditCategory } from "../components/category/EditCategory";
 export { default as EditOrder } from "./EditOrder";
 export { default as EditUser } from "./EditUser";

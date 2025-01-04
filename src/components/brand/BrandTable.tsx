@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HiOutlinePencil, HiOutlineTrash, HiOutlineEye } from "react-icons/hi";
 import { useBrand } from "../../hooks/brand/useBrand";
 import DeleteBrand from "./DeleteBrand";
+import TableSkeleton from "../common/TableSkeleton";
 
 const BrandTable = () => {
   const { brands, isLoading, isError, deleteBrand } = useBrand();
@@ -31,12 +32,7 @@ const BrandTable = () => {
       <div className="dark:text-whiteSecondary">Failed to load brand data</div>
     );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid border-transparent"></div>
-      </div>
-    );
+  if (isLoading) return <TableSkeleton />;
 
   if (!brands || brands.length === 0)
     return <div className="dark:text-whiteSecondary">No brands available</div>;

@@ -5,6 +5,8 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { HiOutlineEye } from "react-icons/hi";
 import { useCategories } from "../../hooks/category/useCategory";
 import DeleteCategory from "./DeleteCategory";
+import TableSkeleton from "../common/TableSkeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CategoryTable = () => {
   const { categories, isLoading, isError, deleteCategory } = useCategories();
@@ -37,12 +39,7 @@ const CategoryTable = () => {
       </div>
     );
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid border-transparent"></div>
-      </div>
-    );
+  if (isLoading) return <TableSkeleton />;
 
   return (
     <>
@@ -89,9 +86,19 @@ const CategoryTable = () => {
                 <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                   <div className="flex items-center gap-x-4">
                     {item.imageUrl ? (
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title_tm}
+                      // <ReactImage // Using ReactImage component
+                      //   src={item.imageUrl}
+                      //   alt={item.title_tm}
+                      //   className="w-10 h-10 rounded-full"
+                      //   loader={
+                      //     <span className="w-10 h-10 rounded-full bg-gray-200" />
+                      //   }
+                      // />
+                      <LazyLoadImage
+                        alt={item.title_en}
+                        // height={image.height}
+                        src={item.imageUrl} // use normal <img> attributes as props
+                        // width={image.width}
                         className="w-10 h-10 rounded-full"
                       />
                     ) : (

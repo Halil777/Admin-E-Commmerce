@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { setSidebar } from "../features/dashboard/dashboardSlice";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { HiOutlinePhoto } from "react-icons/hi2"; // Import the photo icon
 
 const Sidebar = () => {
   const [isLandingOpen, setIsLandingOpen] = useState(false);
@@ -107,6 +108,15 @@ const Sidebar = () => {
           >
             <HiOutlineTruck className="text-lg" />
             <span className="text-sm">Segments</span>
+          </NavLink>
+          <NavLink
+            to="/banners"
+            className={(isActiveObj) =>
+              isActiveObj.isActive ? navActiveClass : navInactiveClass
+            }
+          >
+            <HiOutlinePhoto className="text-lg" />
+            <span className="text-sm">Banners</span>
           </NavLink>
           <NavLink
             to="/brands"

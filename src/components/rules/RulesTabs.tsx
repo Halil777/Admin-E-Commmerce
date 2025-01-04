@@ -1,30 +1,39 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useSWR, { mutate } from "swr";
-import { FaEdit, FaPlus, FaArrowLeft, FaCogs, FaUndo } from "react-icons/fa"; // Added Back Arrow for exiting
-import SunEditor from "suneditor-react"; // Assuming you are using SunEditor
-import "suneditor/dist/css/suneditor.min.css"; // Styles for SunEditor
+import { FaEdit, FaPlus, FaArrowLeft, FaCogs, FaUndo } from "react-icons/fa";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 import { FaClipboardList, FaFlag, FaTruck } from "react-icons/fa6";
+import { BASE_URL } from "../../api/base";
+import TableSkeleton from "../common/TableSkeleton";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const RulesTabs = () => {
   const endpoints = [
-    { name: "Delivery Rule", url: "http://localhost:3000/delivery-rule" },
-    { name: "Service Rule", url: "http://localhost:3000/service-rule" },
-    { name: "Return Rule", url: "http://localhost:3000/return-rule" },
-    { name: "Order Rule", url: "http://localhost:3000/order-rule" },
-    { name: "Embassy Rules", url: "http://localhost:3000/embassy-rules" },
+    { name: "Delivery Rule", url: `${BASE_URL}/delivery-rule` },
+    { name: "Service Rule", url: `${BASE_URL}/service-rule` },
+    { name: "Return Rule", url: `${BASE_URL}/return-rule` },
+    { name: "Order Rule", url: `${BASE_URL}/order-rule` },
+    { name: "Embassy Rules", url: `${BASE_URL}/embassy-rules` },
   ];
 
-  const [activeTab, setActiveTab] = useState(endpoints[0].name); // Default to first tab
+  const [activeTab, setActiveTab] = useState(endpoints[0].name);
   const [language, setLanguage] = useState<"tm" | "ru" | "en">("en");
-  const [isEditing, setIsEditing] = useState(false); // Track if we're in edit mode
-  const [selectedRule, setSelectedRule] = useState<any | null>(null); // Store selected rule for editing
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedRule, setSelectedRule] = useState<any | null>(null);
 
   const { data: rulesData, error } = useSWR(
     endpoints.find((endpoint) => endpoint.name === activeTab)?.url,
     fetcher
   );
+  const [initialDataLoad, setInitialDataLoad] = useState(false);
+
+  useEffect(() => {
+    if (rulesData && !initialDataLoad) {
+      setInitialDataLoad(true);
+    }
+  }, [rulesData, initialDataLoad]);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -33,8 +42,8 @@ const RulesTabs = () => {
   };
 
   const handleAddOrEditClick = (rule: any | null) => {
-    setSelectedRule(rule); // Set the rule to be edited (or null for adding a new one)
-    setIsEditing(true); // Set edit mode to true
+    setSelectedRule(rule);
+    setIsEditing(true);
   };
 
   const handleFormSubmit = async (event: React.FormEvent) => {
@@ -49,25 +58,20 @@ const RulesTabs = () => {
       desc_en: formData.get("desc_en"),
     };
 
-    let requestUrl = `http://localhost:3000/${activeTab
-      .toLowerCase()
-      .replace(" ", "-")}`;
-    let method = "POST"; // Default method for adding
+    let requestUrl = `${BASE_URL}/${activeTab.toLowerCase().replace(" ", "-")}`;
+    let method = "POST";
     if (isEditing && selectedRule) {
-      requestUrl = `${requestUrl}/${selectedRule.id}`; // Append id for editing
-      method = "PATCH"; // Use PATCH for editing
+      requestUrl = `${requestUrl}/${selectedRule.id}`;
+      method = "PATCH";
     }
 
-    // Send the request
     await fetch(requestUrl, {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newRule),
     });
 
-    setIsEditing(false); // Exit edit mode after submit
-
-    // Use mutate to refresh data after adding/editing
+    setIsEditing(false);
     mutate(endpoints.find((endpoint) => endpoint.name === activeTab)?.url);
   };
 
@@ -76,7 +80,6 @@ const RulesTabs = () => {
       key={rule.id}
       className="rule-item p-6 bg-white shadow-lg rounded-xl mb-6 transition-transform transform hover:scale-102 hover:shadow-xl ease-in-out duration-300"
     >
-      {/* Language Selector inside the Card */}
       <div className="absolute top-4 right-4">
         <select
           value={language}
@@ -88,7 +91,6 @@ const RulesTabs = () => {
           <option value="en">English</option>
         </select>
       </div>
-
       <h4 className="font-semibold text-2xl mb-4 text-gray-900">
         {language === "tm" && rule.title_tm}
         {language === "ru" && rule.title_ru}
@@ -105,22 +107,12 @@ const RulesTabs = () => {
               : rule.desc_en,
         }}
       />
-      {/* Conditionally render the Edit or Add button */}
-      {rulesData && rulesData.length > 0 ? (
-        <div
-          onClick={() => handleAddOrEditClick(rule)}
-          className="custom-action-div flex items-center w-40 gap-3 p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer transition-all duration-300 transform hover:scale-105 shadow-xl"
-        >
-          <FaEdit /> <span>Edit Rule</span>
-        </div>
-      ) : (
-        <div
-          onClick={() => handleAddOrEditClick(null)}
-          className="custom-action-div flex items-center gap-3 p-4 bg-green-500 text-white rounded-lg hover:bg-green-600 cursor-pointer transition-all duration-300 transform hover:scale-105 shadow-xl"
-        >
-          <FaPlus /> <span>Add Rule</span>
-        </div>
-      )}
+      <div
+        onClick={() => handleAddOrEditClick(rule)}
+        className="custom-action-div flex items-center w-40 gap-3 p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 cursor-pointer transition-all duration-300 transform hover:scale-105 shadow-xl"
+      >
+        <FaEdit /> <span>Edit Rule</span>
+      </div>
     </div>
   );
 
@@ -128,44 +120,52 @@ const RulesTabs = () => {
     return <div>Error loading rules...</div>;
   }
 
-  if (!rulesData) {
-    return <div>Loading...</div>;
+  if (!rulesData && !initialDataLoad) {
+    return <TableSkeleton />;
   }
 
   return (
-    <div className="p-10 bg-gray-50 min-h-screen transition-all duration-500 ease-in-out">
-      {/* Tabs */}
+    <div className="p-6 bg-gray-50 w-full min-h-screen transition-all duration-500 ease-in-out">
       {isEditing ? (
-        <>
-          {/* Hide Tab Buttons when Editing or Adding */}
-          <div></div>
-        </>
+        <div></div>
       ) : (
-        <div className="mb-8 flex justify-center gap-4 flex-wrap">
-          {endpoints.map((endpoint) => (
-            <div
-              key={endpoint.name}
-              className={`tab-item flex items-center justify-center px-8 py-3 text-lg font-medium transition-all duration-500 rounded-full shadow-lg transform hover:scale-105 cursor-pointer ${
-                activeTab === endpoint.name
-                  ? "bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 text-white"
-                  : "bg-gray-100 text-gray-700"
-              }`}
-              onClick={() => setActiveTab(endpoint.name)}
-            >
-              <span className="icon">
-                {endpoint.name === "Delivery Rule" && <FaTruck />}
-                {endpoint.name === "Service Rule" && <FaCogs />}
-                {endpoint.name === "Return Rule" && <FaUndo />}
-                {endpoint.name === "Order Rule" && <FaClipboardList />}
-                {endpoint.name === "Embassy Rules" && <FaFlag />}
-              </span>
-              <span>{endpoint.name}</span>
-            </div>
-          ))}
+        <div className="mb-6 border-b border-gray-200 flex justify-start">
+          <nav className="flex space-x-2">
+            {endpoints.map((endpoint) => (
+              <button
+                key={endpoint.name}
+                className={`px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200
+                    ${
+                      activeTab === endpoint.name
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                onClick={() => setActiveTab(endpoint.name)}
+              >
+                <span className="inline-flex items-center">
+                  {endpoint.name === "Delivery Rule" && (
+                    <FaTruck className="mr-1" />
+                  )}
+                  {endpoint.name === "Service Rule" && (
+                    <FaCogs className="mr-1" />
+                  )}
+                  {endpoint.name === "Return Rule" && (
+                    <FaUndo className="mr-1" />
+                  )}
+                  {endpoint.name === "Order Rule" && (
+                    <FaClipboardList className="mr-1" />
+                  )}
+                  {endpoint.name === "Embassy Rules" && (
+                    <FaFlag className="mr-1" />
+                  )}
+                  {endpoint.name}
+                </span>
+              </button>
+            ))}
+          </nav>
         </div>
       )}
 
-      {/* Display Active Tab Rule or Form */}
       <div className="bg-white rounded-xl p-8 shadow-lg relative">
         {isEditing ? (
           <>
@@ -274,9 +274,18 @@ const RulesTabs = () => {
               </div>
             </form>
           </>
-        ) : (
-          rulesData.map((rule: any) => renderRule(rule))
-        )}
+        ) : rulesData && initialDataLoad ? (
+          rulesData.length > 0 ? (
+            rulesData.map((rule: any) => renderRule(rule))
+          ) : (
+            <div
+              onClick={() => handleAddOrEditClick(null)}
+              className="custom-action-div flex items-center gap-3 p-4 bg-green-500 text-white rounded-lg hover:bg-green-600 cursor-pointer transition-all duration-300 transform hover:scale-105 shadow-xl"
+            >
+              <FaPlus /> <span>Add Rule</span>
+            </div>
+          )
+        ) : null}
       </div>
     </div>
   );

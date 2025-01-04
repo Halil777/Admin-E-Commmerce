@@ -34,6 +34,9 @@ import CreateBrand from "./components/brand/CreateBrand";
 import EditBrand from "./components/brand/EditBrand";
 import EditSegment from "./components/segment/EditSegment";
 import EditSubCategory from "./components/subcategory/EditSubCategory";
+import Banner from "./pages/banner/Banner";
+import CreateBanner from "./components/banner/CreateBanner";
+import EditBanner from "./components/banner/EditBanner";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -56,6 +59,18 @@ const router = createBrowserRouter([
         element: <LandingV2 />,
       },
       {
+        path: "/banners",
+        element: <Banner />,
+      },
+      {
+        path: "/banners/create-banner",
+        element: <CreateBanner />,
+      },
+      {
+        path: "/banners/:bannerId",
+        element: <EditBanner />,
+      },
+      {
         path: "/products",
         element: <Products />,
       },
@@ -68,7 +83,7 @@ const router = createBrowserRouter([
         element: <CreateProduct />,
       },
       {
-        path: "/products/:id",
+        path: "/products/:productId",
         element: <EditProduct />,
       },
       {
