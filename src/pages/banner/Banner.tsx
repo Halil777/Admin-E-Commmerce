@@ -2,11 +2,13 @@ import { FC } from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 import { Sidebar, WhiteButton } from "../../components";
 import BannerTable from "../../components/banner/BannerTable";
+import ScrollToTop from "../../utils/scroll";
 
 const Banner: FC = () => {
   return (
     <div className="h-auto border-t dark:border-blackSecondary border-blackSecondary border-1 flex dark:bg-blackPrimary bg-whiteSecondary">
       <Sidebar />
+      <ScrollToTop />
       <div className="dark:bg-blackPrimary bg-whiteSecondary w-full ">
         <div className="dark:bg-blackPrimary bg-whiteSecondary py-6">
           <div className="px-4 sm:px-6 lg:px-8 flex justify-between items-center max-sm:flex-col max-sm:gap-3">

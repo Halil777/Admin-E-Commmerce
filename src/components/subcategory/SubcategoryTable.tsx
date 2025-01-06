@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { HiOutlinePencil, HiOutlineTrash, HiOutlineEye } from "react-icons/hi";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { useSubcategories } from "../../hooks/subcategory/useSubcategories";
 import { Loading } from "./Loading";
 import { Error } from "./Error";
@@ -126,12 +126,6 @@ const SubcategoryTable: FC = () => {
                     className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer hover:border-gray-400"
                   >
                     <HiOutlinePencil />
-                  </Link>
-                  <Link
-                    to="/subcategories/1"
-                    className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
-                  >
-                    <HiOutlineEye className="text-lg" />
                   </Link>
                   <button
                     onClick={() => openModal(item.id)}

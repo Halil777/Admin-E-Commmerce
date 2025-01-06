@@ -101,10 +101,10 @@ const CreateProduct: FC = () => {
     form.append("title_en", productData.title_en);
     form.append("stock", String(productData.stock));
     form.append("price", String(productData.price));
-    form.append("category", productData.category);
+    form.append("category_id", productData.category); // Use category_id here
     form.append("subcategory", productData.subcategory);
-    form.append("segment", productData.segment);
-    form.append("brand", productData.brand);
+    form.append("segment_id", productData.segment); // Use segment_id here
+    form.append("brand_id", productData.brand); // Use brand_id here
     form.append("desc_tm", productData.desc_tm);
     form.append("desc_ru", productData.desc_ru);
     form.append("desc_en", productData.desc_en);
@@ -160,10 +160,10 @@ const CreateProduct: FC = () => {
       title_en: formData.title_en,
       stock: formData.stock,
       price: formData.price,
-      category: formData.category, // Correctly set
-      subcategory: formData.subcategory, // Correctly set
-      segment: formData.segment, // Correctly set
-      brand: formData.brand, // Correctly set
+      category: formData.category, // Send category id
+      subcategory: formData.subcategory,
+      segment: formData.segment, // Send segment id
+      brand: formData.brand, // Send brand id
       images: formData.images,
       desc_tm: formData.desc_tm,
       desc_ru: formData.desc_ru,

@@ -5,7 +5,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setSidebar } from "../features/dashboard/dashboardSlice";
 import { Link } from "react-router-dom";
-import SearchInput from "./SearchInput";
+// import SearchInput from "./SearchInput";
 import { toggleDarkMode } from "../features/darkMode/darkModeSlice";
 
 const Header = () => {
@@ -22,9 +22,9 @@ const Header = () => {
         <Link to="/">
           <FaReact className="text-4xl dark:text-whiteSecondary text-blackPrimary hover:rotate-180 hover:duration-1000 hover:ease-in-out cursor-pointer" />
         </Link>
-        <SearchInput />
+        {/* <SearchInput /> */}
         <div className="flex gap-4 items-center max-xl:justify-center">
-          <span className="dark:text-whiteSecondary text-blackPrimary">EN</span>
+          {/* <span className="dark:text-whiteSecondary text-blackPrimary">EN</span> */}
           {darkMode ? (
             <HiOutlineSun
               onClick={() => dispatch(toggleDarkMode())}
@@ -36,9 +36,9 @@ const Header = () => {
               className="text-xl dark:text-whiteSecondary text-blackPrimary cursor-pointer"
             />
           )}
-          <Link to="/notifications">
+          {/* <Link to="/notifications">
             <HiOutlineBell className="text-xl dark:text-whiteSecondary text-blackPrimary" />
-          </Link>
+          </Link> */}
           <Link to="/profile">
             <div className="flex gap-2 items-center">
               <img

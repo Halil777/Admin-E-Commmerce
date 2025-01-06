@@ -22,8 +22,8 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useState } from "react";
 
 const LoginComponent = () => {
-    const [ email, setEmail ] = useState("john@email.com");
-    const [ password, setPassword ] = useState("pass1234567890");
+  const [email, setEmail] = useState("john@email.com");
+  const [password, setPassword] = useState("pass1234567890");
   return (
     <div className="w-[500px] h-[750px] dark:bg-gray-900 bg-white flex flex-col justify-between items-center py-10 max-sm:w-[400px] max-[420px]:w-[320px] max-sm:h-[750px]">
       <div className="flex flex-col items-center gap-10">
@@ -33,7 +33,6 @@ const LoginComponent = () => {
         </h2>
         <div className="flex gap-5">
           <ThirdPartyAuthButton>
-            {" "}
             <FaGoogle className="text-2xl max-sm:text-xl" />
           </ThirdPartyAuthButton>
           <ThirdPartyAuthButton>
@@ -41,22 +40,34 @@ const LoginComponent = () => {
           </ThirdPartyAuthButton>
         </div>
 
-        <p className="dark:text-gray-400 text-gray-700 text-xl max-sm:text-base">OR</p>
+        <p className="dark:text-gray-400 text-gray-700 text-xl max-sm:text-base">
+          OR
+        </p>
 
         <div className="w-full flex flex-col gap-5">
           <InputWithLabel label="Email">
-            <SimpleInput type="email" placeholder="Enter a email..." value={email} onChange={(e) => setEmail(e.target.value)} />
+            <SimpleInput
+              type="email"
+              placeholder="Enter a email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </InputWithLabel>
 
           <InputWithLabel label="Password">
-            <SimpleInput type="password" placeholder="Enter a password..." value={password} onChange={(e) => setPassword(e.target.value)} />
+            <SimpleInput
+              type="password"
+              placeholder="Enter a password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </InputWithLabel>
         </div>
         <p className="dark:text-gray-400 text-gray-700 text-base dark:hover:text-gray-300 hover:text-gray-600 cursor-pointer transition-colors max-sm:text-sm">
           Forgot password?
         </p>
         <WhiteButton
-          link="/"
+          link="/categories"
           textSize="lg"
           width="full"
           py="2"
@@ -73,6 +84,6 @@ const LoginComponent = () => {
         </p>
       </div>
     </div>
-  )
-}
-export default LoginComponent
+  );
+};
+export default LoginComponent;

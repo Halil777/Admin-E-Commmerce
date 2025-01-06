@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { HiOutlinePencil, HiOutlineTrash, HiOutlineEye } from "react-icons/hi";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { useBrand } from "../../hooks/brand/useBrand";
 import DeleteBrand from "./DeleteBrand";
 import TableSkeleton from "../common/TableSkeleton";
@@ -119,12 +119,6 @@ const BrandTable = () => {
                     className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer hover:border-gray-400"
                   >
                     <HiOutlinePencil />
-                  </Link>
-                  <Link
-                    to="/brands/1"
-                    className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
-                  >
-                    <HiOutlineEye className="text-lg" />
                   </Link>
                   <button
                     onClick={() => openModal(item.id)}

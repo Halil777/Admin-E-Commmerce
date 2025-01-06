@@ -1,10 +1,12 @@
 import { HiOutlinePlus } from "react-icons/hi";
 import { ProductTable, Sidebar, WhiteButton } from "../../components";
+import ScrollToTop from "../../utils/scroll";
 
 const Products = () => {
   return (
     <div className="h-auto border-t dark:border-blackSecondary border-blackSecondary border-1 flex dark:bg-blackPrimary bg-whiteSecondary">
       <Sidebar />
+      <ScrollToTop />
       <div className="dark:bg-blackPrimary bg-whiteSecondary w-full ">
         <div className="dark:bg-blackPrimary bg-whiteSecondary py-6">
           <div className="px-4 sm:px-6 lg:px-8 flex justify-between items-center max-sm:flex-col max-sm:gap-3">

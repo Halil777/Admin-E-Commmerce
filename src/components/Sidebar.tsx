@@ -42,14 +42,14 @@ const Sidebar = () => {
           onClick={() => dispatch(setSidebar())}
         />
         <div>
-          <div
+          {/* <div
             onClick={() => setIsLandingOpen(() => !isLandingOpen)}
             className="flex items-center self-stretch gap-2 py-2 px-4 dark:bg-blackPrimary dark:hover:bg-blackSecondary cursor-pointer max-xl:py-1 dark:text-whiteSecondary hover:bg-white text-blackPrimary bg-whiteSecondary text-sm"
           >
             <HiOutlineHome className="text-lg" />
             <span className="text-sm">Landing</span>
-          </div>
-          {isLandingOpen && (
+          </div> */}
+          {/* {isLandingOpen && (
             <div className="ml-2">
               <NavLink
                 to="/"
@@ -71,7 +71,7 @@ const Sidebar = () => {
                 <span className="text-sm">Overview v2</span>
               </NavLink>
             </div>
-          )}
+          )} */}
 
           <NavLink
             to="/products"
@@ -136,7 +136,7 @@ const Sidebar = () => {
             <HiOutlineTruck className="text-lg" />
             <span className="text-sm">Orders</span>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/users"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
@@ -144,7 +144,7 @@ const Sidebar = () => {
           >
             <HiOutlineUser className="text-lg" />
             <span className="text-sm">Users</span>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/rules"
             className={(isActiveObj) =>
@@ -154,7 +154,7 @@ const Sidebar = () => {
             <MdPolicy className="text-lg" />
             <span className="text-sm">Policy</span>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/reviews"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
@@ -162,7 +162,7 @@ const Sidebar = () => {
           >
             <HiOutlineStar className="text-lg" />
             <span className="text-sm">Reviews</span>
-          </NavLink>
+          </NavLink> */}
           <div
             onClick={() => setIsAuthOpen(() => !isAuthOpen)}
             className="flex items-center self-stretch gap-2 py-2 px-4 dark:bg-blackPrimary dark:hover:bg-blackSecondary cursor-pointer max-xl:py-1 dark:text-whiteSecondary hover:bg-white text-blackPrimary bg-whiteSecondary text-sm"
