@@ -14,7 +14,7 @@ const fetchBannerById = async (bannerId: string) => {
 // Update banner by ID
 const updateBanner = async (bannerId: string, data: FormData) => {
   const response = await fetch(`${BASE_URL}banner/${bannerId}`, {
-    method: "PUT", // Changed to PUT
+    method: "PATCH", // Changed to PUT
     body: data,
   });
   if (!response.ok) {

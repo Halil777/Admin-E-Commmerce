@@ -17,10 +17,10 @@ const CreateProduct: FC = () => {
     title_en: "",
     stock: 0,
     price: 0,
-    category: "",
-    subcategory: "",
-    segment: "",
-    brand: "",
+    category: "", // Make sure this has a valid default value
+    subcategory: "", // Same for subcategory
+    segment: "", // Same for segment
+    brand: "", // Same for brand
     images: [] as File[],
     desc_tm: "",
     desc_ru: "",
@@ -148,51 +148,39 @@ const CreateProduct: FC = () => {
 
     const data = await response.json();
     console.log("Product created successfully:", data);
+    navigate("/products");
     return data; // Return the created product (including its ID)
   };
 
   // Handle submission of the product and images
   const handleSubmit = async () => {
-    try {
-      console.log("Form data before sending:", formData);
-      // Collect all errors for submission check
-      const allErrors = Object.keys(errors).filter((key) => errors[key]);
-      if (allErrors.length > 0) {
-        alert("Please correct the form inputs!");
-        return;
-      }
-      const productData = {
-        title_tm: formData.title_tm,
-        title_ru: formData.title_ru,
-        title_en: formData.title_en,
-        stock: formData.stock,
-        price: formData.price,
-        category: formData.category,
-        subcategory: formData.subcategory,
-        segment: formData.segment,
-        brand: formData.brand,
-        images: formData.images,
-        desc_tm: formData.desc_tm,
-        desc_ru: formData.desc_ru,
-        desc_en: formData.desc_en,
-        old_price: formData.old_price,
-        discount_percentage: formData.discount_percentage,
-        discounted_price: formData.discounted_price,
-        weight: formData.weight,
-        width: formData.width,
-        height: formData.height,
-        depth: formData.depth,
-        size: formData.size,
-        color: formData.color,
-        tags: formData.tags,
-      };
-
-      await createProduct(productData);
-      alert("Product created and images uploaded successfully!");
-      navigate("/products");
-    } catch (error) {
-      console.error("Error creating product or uploading images:", error);
-    }
+    const productData = {
+      title_tm: formData.title_tm,
+      title_ru: formData.title_ru,
+      title_en: formData.title_en,
+      stock: formData.stock,
+      price: formData.price,
+      category: formData.category, // Correctly set
+      subcategory: formData.subcategory, // Correctly set
+      segment: formData.segment, // Correctly set
+      brand: formData.brand, // Correctly set
+      images: formData.images,
+      desc_tm: formData.desc_tm,
+      desc_ru: formData.desc_ru,
+      desc_en: formData.desc_en,
+      old_price: formData.old_price,
+      discount_percentage: formData.discount_percentage,
+      discounted_price: formData.discounted_price,
+      weight: formData.weight,
+      width: formData.width,
+      height: formData.height,
+      depth: formData.depth,
+      size: formData.size,
+      color: formData.color,
+      tags: formData.tags,
+    };
+    console.log("Sending product data:", productData);
+    await createProduct(productData);
   };
 
   return (

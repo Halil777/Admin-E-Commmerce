@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlinePencil } from "react-icons/hi";
 import { HiOutlineTrash } from "react-icons/hi";
-import { HiOutlineEye } from "react-icons/hi";
 import { useBanner } from "../../hooks/banner/useBanner";
 import DeleteBanner from "./DeleteBanner";
 import TableSkeleton from "../common/TableSkeleton";
@@ -120,12 +119,6 @@ const BannerTable = () => {
                       className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer hover:border-gray-400"
                     >
                       <HiOutlinePencil />
-                    </Link>
-                    <Link
-                      to="/banners/1"
-                      className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
-                    >
-                      <HiOutlineEye className="text-lg" />
                     </Link>
                     <button
                       onClick={() => openModal(item.id)}
