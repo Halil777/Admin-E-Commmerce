@@ -12,7 +12,6 @@ import { HiOutlinePhoto } from "react-icons/hi2";
 import { FaHandshake } from "react-icons/fa"; // Import the handshake icon
 
 const Sidebar = () => {
-  const [isLandingOpen, setIsLandingOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { isSidebarOpen } = useAppSelector((state) => state.dashboard);
   const dispatch = useAppDispatch();

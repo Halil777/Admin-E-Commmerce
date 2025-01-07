@@ -1,5 +1,3 @@
-import React from "react";
-
 const TableSkeleton = () => {
   return (
     <table className="mt-6 w-full whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import InputWithLabel from "../../InputWithLabel";
 import SimpleInput from "../../SimpleInput";
 
