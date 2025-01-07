@@ -76,7 +76,7 @@ const LoginComponent = () => {
         <p className="dark:text-gray-400 text-gray-700 text-base cursor-pointer transition-colors flex gap-1 items-center max-sm:text-sm">
           Not registered yet?{" "}
           <Link
-            to="/register"
+            to="/admin/register"
             className="dark:text-whiteSecondary text-blackPrimary hover:text-black flex gap-1 items-center dark:hover:text-white max-sm:text-sm hover:underline"
           >
             Register <FaArrowRight className="mt-[2px]" />

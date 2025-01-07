@@ -1,4 +1,3 @@
-
 import { OrderTable, Pagination, RowsPerPage, Sidebar } from "../components";
 import { HiOutlinePlus } from "react-icons/hi";
 import { HiOutlineChevronRight } from "react-icons/hi";
@@ -26,9 +25,14 @@ const Orders = () => {
             <div className="flex gap-x-2 max-[370px]:flex-col max-[370px]:gap-2 max-[370px]:items-center">
               <button className="dark:bg-blackPrimary bg-whiteSecondary border border-gray-600 w-32 py-2 text-lg dark:hover:border-gray-500 hover:border-gray-400 duration-200 flex items-center justify-center gap-x-2">
                 <AiOutlineExport className="dark:text-whiteSecondary text-blackPrimary text-base" />
-                <span className="dark:text-whiteSecondary text-blackPrimary font-medium">Export</span>
+                <span className="dark:text-whiteSecondary text-blackPrimary font-medium">
+                  Export
+                </span>
               </button>
-              <Link to="/orders/create-order" className="dark:bg-whiteSecondary bg-blackPrimary w-48 py-2 text-lg dark:hover:bg-white hover:bg-blackSecondary duration-200 flex items-center justify-center gap-x-1">
+              <Link
+                to="/admin/orders/create-order"
+                className="dark:bg-whiteSecondary bg-blackPrimary w-48 py-2 text-lg dark:hover:bg-white hover:bg-blackSecondary duration-200 flex items-center justify-center gap-x-1"
+              >
                 <HiOutlinePlus className="dark:text-blackPrimary text-whiteSecondary" />
                 <span className="dark:text-blackPrimary text-whiteSecondary font-semibold">
                   Add an order
@@ -67,6 +71,6 @@ const Orders = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default Orders
+  );
+};
+export default Orders;

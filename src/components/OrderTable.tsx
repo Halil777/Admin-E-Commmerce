@@ -15,8 +15,6 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { HiOutlineEye } from "react-icons/hi";
 import { orderAdminItems } from "../utils/data";
 
-
-
 const OrderTable = () => {
   return (
     <table className="mt-6 w-full whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
@@ -104,13 +102,13 @@ const OrderTable = () => {
             <td className="py-4 pl-0 pr-4 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
               <div className="flex gap-x-1 justify-end">
                 <Link
-                  to="/orders/1"
+                  to="/admin/orders/1"
                   className="dark:bg-blackPrimary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 block flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
                 >
                   <HiOutlinePencil className="text-lg" />
                 </Link>
                 <Link
-                  to="/orders/1"
+                  to="/admin/orders/1"
                   className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 block flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
                 >
                   <HiOutlineEye className="text-lg" />
