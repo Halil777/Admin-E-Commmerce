@@ -45,9 +45,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<HomeLayout />}>
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/register" element={<Register />} />
+        <Route path="/admin" element={<HomeLayout />}>
           <Route index element={<Landing />} />
           <Route path="landing-v2" element={<LandingV2 />} />
           <Route path="banners" element={<Banner />} />
