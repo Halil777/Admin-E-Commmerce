@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import {
   Categories,
   CreateOrder,
@@ -50,7 +54,7 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "",
+    path: "/",
     element: <HomeLayout />,
     children: [
       {
@@ -212,9 +216,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <Router>
       <RouterProvider router={router} />
-    </>
+    </Router>
   );
 }
 
