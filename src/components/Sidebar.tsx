@@ -67,7 +67,7 @@ const Sidebar = () => {
           )} */}
 
           <NavLink
-            to="/products"
+            to="/admin/products"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -76,7 +76,7 @@ const Sidebar = () => {
             <span className="text-sm">Products</span>
           </NavLink>
           <NavLink
-            to="/categories"
+            to="/admin/categories"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -85,7 +85,7 @@ const Sidebar = () => {
             <span className="text-sm">Categories</span>
           </NavLink>
           <NavLink
-            to="/subcategories"
+            to="/admin/subcategories"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -94,7 +94,7 @@ const Sidebar = () => {
             <span className="text-sm">Subcategories</span>
           </NavLink>
           <NavLink
-            to="/segments"
+            to="/admin/segments"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -103,7 +103,7 @@ const Sidebar = () => {
             <span className="text-sm">Segments</span>
           </NavLink>
           <NavLink
-            to="/banners"
+            to="/admin/banners"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -112,7 +112,7 @@ const Sidebar = () => {
             <span className="text-sm">Banners</span>
           </NavLink>
           <NavLink
-            to="/partners"
+            to="/admin/partners"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -121,7 +121,7 @@ const Sidebar = () => {
             <span className="text-sm">Partners</span>
           </NavLink>
           <NavLink
-            to="/brands"
+            to="/admin/brands"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -130,7 +130,7 @@ const Sidebar = () => {
             <span className="text-sm">Brands</span>
           </NavLink>
           <NavLink
-            to="/orders"
+            to="/admin/orders"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -148,7 +148,7 @@ const Sidebar = () => {
             <span className="text-sm">Users</span>
           </NavLink> */}
           <NavLink
-            to="/rules"
+            to="/admin/rules"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
@@ -175,7 +175,7 @@ const Sidebar = () => {
           {isAuthOpen && (
             <div className="ml-2">
               <NavLink
-                to="/login"
+                to="/admin/login"
                 className={(isActiveObj) =>
                   isActiveObj.isActive ? navActiveClass : navInactiveClass
                 }
@@ -184,7 +184,7 @@ const Sidebar = () => {
                 <span className="text-sm">Login</span>
               </NavLink>
               <NavLink
-                to="/register"
+                to="/admin/register"
                 className={(isActiveObj) =>
                   isActiveObj.isActive ? navActiveClass : navInactiveClass
                 }
@@ -198,7 +198,7 @@ const Sidebar = () => {
 
         <div className="absolute bottom-0 border-1 border-t dark:border-blackSecondary border-blackSecondary w-full">
           <NavLink
-            to="/help-desk"
+            to="/admin/help-desk"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
