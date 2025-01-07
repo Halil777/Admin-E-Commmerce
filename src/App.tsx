@@ -37,6 +37,9 @@ import EditSubCategory from "./components/subcategory/EditSubCategory";
 import Banner from "./pages/banner/Banner";
 import CreateBanner from "./components/banner/CreateBanner";
 import EditBanner from "./components/banner/EditBanner";
+import Partners from "./pages/partners/Partners";
+import CreatePartner from "./components/partners/CreatePartner";
+import EditPartner from "./components/partners/EditPartner";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -69,6 +72,18 @@ const router = createBrowserRouter([
       {
         path: "/banners/:bannerId",
         element: <EditBanner />,
+      },
+      {
+        path: "/partners",
+        element: <Partners />,
+      },
+      {
+        path: "/partners/create-partner",
+        element: <CreatePartner />,
+      },
+      {
+        path: "/partners/:partnerId",
+        element: <EditPartner />,
       },
       {
         path: "/products",

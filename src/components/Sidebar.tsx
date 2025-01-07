@@ -1,21 +1,15 @@
-import {
-  HiLogin,
-  HiOutlineHome,
-  HiUserGroup,
-  HiOutlineX,
-  HiOutlineUser,
-} from "react-icons/hi";
+import { HiLogin, HiUserGroup, HiOutlineX } from "react-icons/hi";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { HiOutlineTag } from "react-icons/hi";
 import { HiOutlineTruck } from "react-icons/hi";
-import { HiOutlineStar } from "react-icons/hi";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import { MdPolicy } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setSidebar } from "../features/dashboard/dashboardSlice";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { HiOutlinePhoto } from "react-icons/hi2"; // Import the photo icon
+import { HiOutlinePhoto } from "react-icons/hi2";
+import { FaHandshake } from "react-icons/fa"; // Import the handshake icon
 
 const Sidebar = () => {
   const [isLandingOpen, setIsLandingOpen] = useState(false);
@@ -117,6 +111,15 @@ const Sidebar = () => {
           >
             <HiOutlinePhoto className="text-lg" />
             <span className="text-sm">Banners</span>
+          </NavLink>
+          <NavLink
+            to="/partners"
+            className={(isActiveObj) =>
+              isActiveObj.isActive ? navActiveClass : navInactiveClass
+            }
+          >
+            <FaHandshake className="text-lg" />
+            <span className="text-sm">Partners</span>
           </NavLink>
           <NavLink
             to="/brands"
