@@ -60,7 +60,6 @@ const EditProduct: FC = () => {
     tags: "",
     is_active: true,
     views: 0,
-    brand_id: 0,
     categories: [],
     segment_id: 0,
   });
@@ -159,11 +158,14 @@ const EditProduct: FC = () => {
     if (inputObject.views !== undefined) {
       formData.append("views", String(inputObject.views));
     }
-    if (inputObject.brand_id !== undefined) {
-      formData.append("brand_id", String(inputObject.brand_id));
+    if (inputObject.brand !== undefined) {
+      formData.append("brand_id", String(inputObject.brand));
     }
     if (inputObject.segment_id !== undefined) {
       formData.append("segment_id", String(inputObject.segment_id));
+    }
+    if (inputObject.subcategory !== undefined) {
+      formData.append("subcategory_id", String(inputObject.subcategory));
     }
     // Send categories as an array of numbers
     if (inputObject.categories !== undefined) {
@@ -185,7 +187,7 @@ const EditProduct: FC = () => {
     try {
       await updateProduct(productId!, formData);
       alert("Product updated successfully!");
-      navigate("/products");
+      navigate("/admin/products");
     } catch (error) {
       console.error("Failed to update product:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");
