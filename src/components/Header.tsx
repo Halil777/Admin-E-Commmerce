@@ -1,6 +1,5 @@
 import { FaReact } from "react-icons/fa6";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import { HiOutlineBell } from "react-icons/hi";
 import { HiOutlineMenu } from "react-icons/hi";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { setSidebar } from "../features/dashboard/dashboardSlice";
@@ -19,7 +18,7 @@ const Header = () => {
           className="text-2xl dark:text-whiteSecondary text-blackPrimary absolute bottom-7 left-5 xl:hidden max-sm:static max-sm:order-1 cursor-pointer"
           onClick={() => dispatch(setSidebar())}
         />
-        <Link to="/">
+        <Link to="/admin">
           <FaReact className="text-4xl dark:text-whiteSecondary text-blackPrimary hover:rotate-180 hover:duration-1000 hover:ease-in-out cursor-pointer" />
         </Link>
         {/* <SearchInput /> */}
@@ -39,7 +38,7 @@ const Header = () => {
           {/* <Link to="/notifications">
             <HiOutlineBell className="text-xl dark:text-whiteSecondary text-blackPrimary" />
           </Link> */}
-          <Link to="/profile">
+          <Link to="/admin/profile">
             <div className="flex gap-2 items-center">
               <img
                 src="/src/assets/profile.jpg"

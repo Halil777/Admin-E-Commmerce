@@ -19,7 +19,7 @@ const WhiteButton = ({
 }) => {
   return (
     <Link
-      to={link}
+      to={"/admin" + link}
       className={`dark:bg-whiteSecondary bg-blackPrimary w-${width} px-${px} py-${py} text-${textSize} dark:hover:bg-white hover:bg-gray-800 bg-blackPrimary duration-200 flex items-center justify-center gap-x-2`}
     >
       {children}
