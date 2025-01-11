@@ -20,7 +20,7 @@ const LoginComponent = () => {
       setNotification({ message: "Login successful!", type: "success" });
       setTimeout(() => {
         // Navigate to the categories page after 3 seconds
-        navigate("/categories");
+        navigate("/admin/categories");
       }, 3000);
     } else {
       setNotification({ message: "Invalid email or password!", type: "error" });

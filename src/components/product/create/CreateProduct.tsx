@@ -99,17 +99,10 @@ const CreateProduct: FC = () => {
     form.append("title_en", productData.title_en);
     form.append("stock", String(productData.stock));
     form.append("price", String(productData.price));
-<<<<<<< HEAD
     form.append("category_id", productData.category);
     form.append("subcategory", productData.subcategory);
     form.append("segment_id", productData.segment);
     form.append("brand_id", productData.brand);
-=======
-    form.append("category_id", productData.category); // Use category_id here
-    form.append("subcategory_id", productData.subcategory);
-    form.append("segment_id", productData.segment); // Use segment_id here
-    form.append("brand_id", productData.brand); // Use brand_id here
->>>>>>> 3eaffb6b1257d1095793c9b1f4d8c58cb5e5469a
     form.append("desc_tm", productData.desc_tm);
     form.append("desc_ru", productData.desc_ru);
     form.append("desc_en", productData.desc_en);
@@ -152,7 +145,7 @@ const CreateProduct: FC = () => {
 
     const data = await response.json();
     console.log("Product created successfully:", data);
-    navigate("/products");
+    navigate("/admin/products");
     return data;
   };
 

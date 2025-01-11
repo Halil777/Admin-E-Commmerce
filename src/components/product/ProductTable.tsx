@@ -96,9 +96,9 @@ const ProductTable = () => {
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Category
             </th>
-            <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
+            {/* <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Subcategory
-            </th>
+            </th> */}
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Brand
             </th>
@@ -112,89 +112,36 @@ const ProductTable = () => {
         </thead>
         <tbody className="divide-y divide-white/5">
           {Array.isArray(productWithNames) && productWithNames.length > 0 ? (
-            productWithNames.map((item: any) => {
-              console.log(item); // Log the entire item object
-              return (
-                <tr
-                  key={item.id}
-                  onClick={() => handleRowClick(item)}
-                  className="cursor:pointer"
-                >
-                  <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                    <div className="flex items-center gap-x-4">
-                      {item.images?.[0] ? (
-                        <img
-                          src={item.images[0]}
-                          alt={item.title_tm}
-                          className="w-10 h-10 rounded-full"
-                        />
-                      ) : (
-                        <span className="text-sm text-gray-500">No Image</span>
-                      )}
-                      <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
-                        {item.title_tm}
-                      </div>
+            productWithNames.map((item: any) => (
+              <tr
+                key={item.id}
+                onClick={() => handleRowClick(item)}
+                className="cursor:pointer"
+              >
+                <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
+                  <div className="flex items-center gap-x-4">
+                    {item.images?.[0] ? (
+                      <img
+                        src={item.images[0]}
+                        alt={item.title_tm}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    ) : (
+                      <span className="text-sm text-gray-500">No Image</span>
+                    )}
+                    <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
+                      {item.title_tm}
                     </div>
-<<<<<<< HEAD
-                  </td>
-                  <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                    {item.stock}
-                  </td>
-                  <td className="py-4 pl-0 pr-8 text-rose-600 font-medium table-cell">
-                    {item.price}
-                  </td>
-                  {/* Display category name which we have get in use effect with product data  */}
-                  <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                    {item.categoryName}
-                  </td>
-                  {/* Display subcategory name which we have get in use effect with product data  */}
-                  <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                    {item.subcategoryName}
-                  </td>
-                  <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                    {item.brand?.title_en}
-                  </td>
-                  <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
-                    <div className="flex gap-x-1 justify-end">
-                      <Link
-                        to={`/products/${item.id}`}
-                        state={{ product: item }}
-                        className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer hover:border-gray-400"
-                      >
-                        <HiOutlinePencil />
-                      </Link>
-                      <button
-                        onClick={() => openModal(item.id)}
-                        className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer dark:hover:border-gray-500 hover:border-gray-400"
-                      >
-                        <HiOutlineTrash className="text-lg" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })
-=======
                   </div>
                 </td>
                 <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
                   {item.stock}
                 </td>
                 <td className="py-4 pl-0 pr-8 text-rose-600 font-medium table-cell">
-                  {item.price}
+                  {item.price}m
                 </td>
                 <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                  <div className="flex items-center gap-x-2">
-                    <span
-                      className={`h-2 w-2 rounded-full ${
-                        item.is_active ? "bg-green-500" : "bg-red-500"
-                      }`}
-                    ></span>
-                    <span>{item.is_active ? "In stock" : "Out of stock"}</span>
-                  </div>
-                </td>
-                <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                  {item.category?.title_en}
+                  {item.categoryName}
                 </td>
                 <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
                   {item.brand?.title_en}
@@ -218,7 +165,6 @@ const ProductTable = () => {
                 </td>
               </tr>
             ))
->>>>>>> 3eaffb6b1257d1095793c9b1f4d8c58cb5e5469a
           ) : (
             <tr>
               <td colSpan={7} className="text-center py-4">
