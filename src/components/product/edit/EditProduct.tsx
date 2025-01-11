@@ -43,7 +43,7 @@ const EditProduct: FC = () => {
     category: "",
     subcategory: "",
     segment: "",
-    brand: "",
+    brand_id: "",
     images: [],
     desc_tm: "",
     desc_ru: "",
@@ -158,8 +158,8 @@ const EditProduct: FC = () => {
     if (inputObject.views !== undefined) {
       formData.append("views", String(inputObject.views));
     }
-    if (inputObject.brand !== undefined) {
-      formData.append("brand_id", String(inputObject.brand));
+    if (inputObject.brand_id !== undefined) {
+      formData.append("brand_id", String(inputObject.brand_id));
     }
     if (inputObject.segment_id !== undefined) {
       formData.append("segment_id", String(inputObject.segment_id));
