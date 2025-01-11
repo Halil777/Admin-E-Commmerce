@@ -17,10 +17,10 @@ const CreateProduct: FC = () => {
     title_en: "",
     stock: 0,
     price: 0,
-    category: "", // Make sure this has a valid default value
-    subcategory: "", // Same for subcategory
-    segment: "", // Same for segment
-    brand: "", // Same for brand
+    category: "",
+    subcategory: "",
+    segment: "",
+    brand: "",
     images: [] as File[],
     desc_tm: "",
     desc_ru: "",
@@ -91,20 +91,18 @@ const CreateProduct: FC = () => {
     setFormData((prev) => ({ ...prev, images }));
   };
 
-  // Function to create a product
   const createProduct = async (productData: any) => {
     const form = new FormData();
 
-    // Append text fields to FormData
     form.append("title_tm", productData.title_tm);
     form.append("title_ru", productData.title_ru);
     form.append("title_en", productData.title_en);
     form.append("stock", String(productData.stock));
     form.append("price", String(productData.price));
-    form.append("category_id", productData.category); // Use category_id here
+    form.append("category_id", productData.category);
     form.append("subcategory", productData.subcategory);
-    form.append("segment_id", productData.segment); // Use segment_id here
-    form.append("brand_id", productData.brand); // Use brand_id here
+    form.append("segment_id", productData.segment);
+    form.append("brand_id", productData.brand);
     form.append("desc_tm", productData.desc_tm);
     form.append("desc_ru", productData.desc_ru);
     form.append("desc_en", productData.desc_en);
@@ -119,7 +117,6 @@ const CreateProduct: FC = () => {
     form.append("color", productData.color);
     form.append("tags", productData.tags);
 
-    // Append images to FormData
     if (productData.images) {
       productData.images.forEach((image: File) => {
         form.append("images", image);
@@ -149,10 +146,9 @@ const CreateProduct: FC = () => {
     const data = await response.json();
     console.log("Product created successfully:", data);
     navigate("/products");
-    return data; // Return the created product (including its ID)
+    return data;
   };
 
-  // Handle submission of the product and images
   const handleSubmit = async () => {
     const productData = {
       title_tm: formData.title_tm,
@@ -160,10 +156,10 @@ const CreateProduct: FC = () => {
       title_en: formData.title_en,
       stock: formData.stock,
       price: formData.price,
-      category: formData.category, // Send category id
+      category: formData.category,
       subcategory: formData.subcategory,
-      segment: formData.segment, // Send segment id
-      brand: formData.brand, // Send brand id
+      segment: formData.segment,
+      brand: formData.brand,
       images: formData.images,
       desc_tm: formData.desc_tm,
       desc_ru: formData.desc_ru,
@@ -179,6 +175,24 @@ const CreateProduct: FC = () => {
       color: formData.color,
       tags: formData.tags,
     };
+
+    console.log("Product data before sending:");
+    for (const key in productData) {
+      if (productData.hasOwnProperty(key)) {
+        const value = productData[key as keyof typeof productData]; // Type assertion here
+        if (value === null || value === undefined || value === "") {
+          console.log(
+            `${key}: ${
+              value === null
+                ? "null"
+                : value === undefined
+                ? "undefined"
+                : "empty string"
+            }`
+          );
+        }
+      }
+    }
     console.log("Sending product data:", productData);
     await createProduct(productData);
   };

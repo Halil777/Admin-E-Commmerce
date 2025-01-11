@@ -40,6 +40,7 @@ import EditBanner from "./components/banner/EditBanner";
 import Partners from "./pages/partners/Partners";
 import CreatePartner from "./components/partners/CreatePartner";
 import EditPartner from "./components/partners/EditPartner";
+import AddProporties from "./components/product/AddProporties";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Landing />,
+        element: <Login />,
       },
       {
         path: "/landing-v2",
@@ -205,6 +206,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/add-proporties/:productId",
+        element: <AddProporties />,
       },
     ],
   },
