@@ -100,7 +100,7 @@ const CreateSegment: FC = () => {
           subcategory_id: "",
         });
         setTimeout(() => {
-          navigate("/segments");
+          navigate("/admin/segments");
         }, 1000);
       } else {
         const errorData = await response.json();

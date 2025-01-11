@@ -80,7 +80,7 @@ const CreateCategory = () => {
           imageUrl: "",
         });
         alert("Category created successfully!");
-        navigate("/categories");
+        navigate("/admin/categories");
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);

@@ -90,7 +90,7 @@ const EditPartner = () => {
     try {
       await updatePartner(partnerId!, formData);
       alert("Partner updated successfully!");
-      navigate("/partners");
+      navigate("/admin/partners");
     } catch (error) {
       console.error("Failed to update partner:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");

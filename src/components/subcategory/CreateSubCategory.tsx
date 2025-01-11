@@ -96,7 +96,7 @@ const CreateSubCategory: FC = () => {
           category_id: "",
         });
         setTimeout(() => {
-          navigate("/subcategories");
+          navigate("/admin/subcategories");
         }, 1000);
       } else {
         const errorData = await response.json();

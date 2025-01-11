@@ -80,7 +80,7 @@ const CreateBrand = () => {
           imageUrl: "",
         });
         alert("Brand created successfully!");
-        navigate("/brands");
+        navigate("/admin/brands");
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);

@@ -104,7 +104,7 @@ const EditSegment = () => {
     try {
       await updateSegment(segmentId!, formData);
       alert("Segment updated successfully!");
-      navigate("/segments");
+      navigate("/admin/segments");
     } catch (error) {
       console.error("Failed to update segment:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");

@@ -77,7 +77,7 @@ const CreatePartner = () => {
           title_en: "",
         });
         alert("Partner created successfully!");
-        navigate("/partners"); // Changed route to partners
+        navigate("/admin/partners"); // Changed route to partners
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);

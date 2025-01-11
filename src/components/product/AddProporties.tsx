@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import Sidebar from "../Sidebar";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSave } from "react-icons/ai";
@@ -100,8 +100,12 @@ const AddProporties: FC = () => {
   const handleNewFieldChange = (field: string, value: any) => {
     setNewField((prev) => ({ ...prev, [field]: value }));
   };
+  // Corrected handleNewPropertyChange - used to be not used. Now it sets the 'values' field of newProperty.
   const handleNewPropertyChange = (field: string, value: any) => {
-    setNewProperty((prev) => ({ ...prev, [field]: value }));
+    setNewProperty((prev) => ({
+      ...prev,
+      values: { ...prev.values, [field]: value },
+    }));
   };
 
   const addField = () => {
@@ -139,12 +143,7 @@ const AddProporties: FC = () => {
     setErrors({});
   };
 
-  const renderInput = (
-    index: number,
-    field: Field,
-    value: string | number,
-    property: Property
-  ) => {
+  const renderInput = (index: number, field: Field, value: string | number) => {
     const commonProps = {
       className:
         "mt-1 p-2 w-full rounded border dark:bg-blackSecondary bg-white focus:ring focus:ring-opacity-50 dark:text-whiteSecondary text-blackPrimary",
@@ -185,6 +184,7 @@ const AddProporties: FC = () => {
         values[fieldName] = prop.values[fieldName];
       });
 
+      // Removed restValues, and instead extract specific values from prop.values
       const {
         title_tm,
         title_ru,
@@ -193,17 +193,16 @@ const AddProporties: FC = () => {
         value_ru,
         value_en,
         type,
-        ...restValues
       } = prop.values;
 
       return {
-        title_tm: values.title_tm as string,
-        title_ru: values.title_ru as string,
-        title_en: values.title_en as string,
-        value_tm: values.value_tm as string,
-        value_ru: values.value_ru as string,
-        value_en: values.value_en as string,
-        type: values.type as string,
+        title_tm: title_tm as string,
+        title_ru: title_ru as string,
+        title_en: title_en as string,
+        value_tm: value_tm as string,
+        value_ru: value_ru as string,
+        value_en: value_en as string,
+        type: type as string,
         product_id: Number(productId),
         id: prop.id,
       };
@@ -276,8 +275,7 @@ const AddProporties: FC = () => {
                   {renderInput(
                     index,
                     field,
-                    property.values[getFieldName(field)],
-                    property
+                    property.values[getFieldName(field)]
                   )}
                 </div>
               ))}
@@ -350,6 +348,23 @@ const AddProporties: FC = () => {
                 <option value="select">Select</option>
               </select>
             </div>
+          </div>
+          {/*Input for new property values*/}
+          <div className="grid grid-cols-2 gap-4">
+            {newProperty?.fields.map((field) => (
+              <div key={field.label_en}>
+                <label className="block text-sm font-medium dark:text-whiteSecondary text-blackPrimary">
+                  {field.label_en}
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 p-2 w-full rounded border dark:bg-blackSecondary bg-white focus:ring focus:ring-opacity-50 dark:text-whiteSecondary text-blackPrimary"
+                  onChange={(e) =>
+                    handleNewPropertyChange(getFieldName(field), e.target.value)
+                  }
+                />
+              </div>
+            ))}
           </div>
           {errors.field && (
             <p className="text-red-500 text-sm mt-2">{errors.field}</p>

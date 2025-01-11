@@ -90,7 +90,7 @@ const EditBrand = () => {
     try {
       await updateBrand(brandId!, formData);
       alert("Brand updated successfully!");
-      navigate("/brands");
+      navigate("/admin/brands");
     } catch (error) {
       console.error("Failed to update brand:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");

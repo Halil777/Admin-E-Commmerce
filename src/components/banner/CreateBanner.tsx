@@ -76,7 +76,7 @@ const CreateBanner = () => {
           imageUrl: "",
         });
         alert("Banner created successfully!");
-        navigate("/banners");
+        navigate("/admin/banners");
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message}`);

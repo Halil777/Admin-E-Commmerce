@@ -45,7 +45,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/admin/login" element={<Login />} />
+        <Route path="" element={<Login />} />
         <Route path="/admin/register" element={<Register />} />
         <Route path="/admin" element={<HomeLayout />}>
           <Route index element={<Landing />} />

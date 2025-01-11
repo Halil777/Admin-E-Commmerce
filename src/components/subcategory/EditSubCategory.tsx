@@ -109,7 +109,7 @@ const EditSubCategory = () => {
     try {
       await updateSubcategory(subcategoryId!, formData);
       alert("Subcategory updated successfully!");
-      navigate("/subcategories");
+      navigate("/admin/subcategories");
     } catch (error) {
       console.error("Failed to update subcategory:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");

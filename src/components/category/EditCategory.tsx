@@ -90,7 +90,7 @@ const EditCategory = () => {
     try {
       await updateCategory(categoryId!, formData);
       alert("Category updated successfully!");
-      navigate("/categories");
+      navigate("/admin/categories");
     } catch (error) {
       console.error("Failed to update category:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");

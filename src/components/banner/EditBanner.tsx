@@ -89,7 +89,7 @@ const EditBanner = () => {
     try {
       await updateBanner(bannerId!, formData);
       alert("Banner updated successfully!");
-      navigate("/banners");
+      navigate("/admin/banners");
     } catch (error) {
       console.error("Failed to update banner:", error);
       setError(error instanceof Error ? error.message : "An error occurred.");
