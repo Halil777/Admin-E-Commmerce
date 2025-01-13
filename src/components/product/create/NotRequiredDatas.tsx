@@ -58,6 +58,7 @@ const NotRequiredDatas: FC<NotRequiredDatasProps> = ({
     // This assumes your parent `CreateProduct` component passes the correct error update function
     // to NotRequiredDatas.
     // Here, you'll make changes to the `errors` state.
+    console.log(updater);
   };
   return (
     <div>

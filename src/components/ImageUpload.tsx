@@ -1,21 +1,13 @@
 import React, { useState } from "react";
 
-interface ImageUploadProps {
-  onImageUpload: (imageUrl: string | null) => void;
-}
-
-const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
+const ImageUpload: React.FC = () => {
   const [uploading, setUploading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (!event.target.files || event.target.files.length === 0) {
-      onImageUpload(null);
-      return;
-    }
-    console.log(imageUrl);
+    if (!event.target.files || event.target.files.length === 0) return;
+
     const file = event.target.files[0];
     setUploading(true);
 
@@ -31,13 +23,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
       if (!response.ok) {
         throw new Error("File upload failed.");
       }
-      const data = await response.json();
-      const imageUrl = data.url;
-      setImageUrl(imageUrl);
-      onImageUpload(imageUrl);
     } catch (error) {
       console.error("File upload failed:", error);
-      onImageUpload(null);
     } finally {
       setUploading(false);
     }

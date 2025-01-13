@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { nanoid } from "nanoid";
 import { Link } from "react-router-dom";
-import { HiOutlinePencil, HiOutlineTrash, HiOutlineEye } from "react-icons/hi";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { observer } from "mobx-react-lite";
 import UserViewModel from "../../store/users/UserViewModel"; // Adjust path as needed
 

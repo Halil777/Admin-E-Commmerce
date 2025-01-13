@@ -1,7 +1,7 @@
 import { AiOutlineSave } from "react-icons/ai";
 import { HiOutlineSave } from "react-icons/hi";
 import {
-  ImageUpload,
+  // ImageUpload,
   InputWithLabel,
   Sidebar,
   SimpleInput,
@@ -73,7 +73,7 @@ const CreateReview = () => {
               <h3 className="text-2xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
                 Upload review images
               </h3>
-              <ImageUpload />
+              {/* <ImageUpload /> */}
             </div>
           </div>
         </div>
