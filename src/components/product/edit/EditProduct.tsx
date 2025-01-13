@@ -62,6 +62,7 @@ const EditProduct: FC = () => {
     views: 0,
     categories: [],
     segment_id: 0,
+    brand: "",
   });
 
   const [selectedFiles, setSelectedFiles] = useState<(File | string)[] | null>(
