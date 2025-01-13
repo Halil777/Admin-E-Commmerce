@@ -7,6 +7,7 @@ import { AiOutlineSave } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import NotRequiredDatas from "./NotRequiredDatas";
 import { BASE_URL } from "../../../api/base";
+import CreateProporties from "../proporties/CreateProporties";
 
 const CreateProduct: FC = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const CreateProduct: FC = () => {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [createdProductId, setCreatedProductId] = useState<number | null>(null);
 
   const handleInputChange = (field: string, value: any) => {
     setFormData((prev) => {
@@ -145,7 +147,6 @@ const CreateProduct: FC = () => {
 
     const data = await response.json();
     console.log("Product created successfully:", data);
-    navigate("/admin/products");
     return data;
   };
 
@@ -176,25 +177,20 @@ const CreateProduct: FC = () => {
       tags: formData.tags,
     };
 
-    console.log("Product data before sending:");
-    for (const key in productData) {
-      if (productData.hasOwnProperty(key)) {
-        const value = productData[key as keyof typeof productData]; // Type assertion here
-        if (value === null || value === undefined || value === "") {
-          console.log(
-            `${key}: ${
-              value === null
-                ? "null"
-                : value === undefined
-                ? "undefined"
-                : "empty string"
-            }`
-          );
-        }
+    try {
+      const createdProduct = await createProduct(productData);
+      if (createdProduct && createdProduct.id) {
+        setCreatedProductId(createdProduct.id);
+        console.log("Product ID:", createdProduct.id);
+
+        alert("Product created successfully!");
+        // navigate("/admin/products")   // After successful product and proporties creation redirect if you want
+      } else {
+        console.log("something went wrong");
       }
+    } catch (error) {
+      console.log("error creating product", error);
     }
-    console.log("Sending product data:", productData);
-    await createProduct(productData);
   };
 
   return (
@@ -244,6 +240,7 @@ const CreateProduct: FC = () => {
             </div>
           </div>
         </div>
+        {createdProductId && <CreateProporties productId={createdProductId} />}
       </div>
     </div>
   );
