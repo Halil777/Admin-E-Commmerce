@@ -100,7 +100,7 @@ const CreateProduct: FC = () => {
     form.append("stock", String(productData.stock));
     form.append("price", String(productData.price));
     form.append("category_id", productData.category);
-    form.append("subcategory", productData.subcategory);
+    form.append("subcategory_id", productData.subcategory);
     form.append("segment_id", productData.segment);
     form.append("brand_id", productData.brand);
     form.append("desc_tm", productData.desc_tm);

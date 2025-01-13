@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { useProduct } from "../../hooks/product/useProduct";
 import DeleteProduct from "./DeleteProduct";
@@ -15,7 +15,6 @@ const ProductTable = () => {
   const [selectedProductId, setSelectedProductId] = useState<number | null>(
     null
   );
-  const navigate = useNavigate();
   const [productWithNames, setProductWithNames] = useState<any[]>([]);
 
   const openModal = (productId: number) => {
@@ -34,9 +33,7 @@ const ProductTable = () => {
       closeModal();
     }
   };
-  const handleRowClick = (item: any) => {
-    navigate(`/add-proporties/${item.id}`, { state: { product: item } });
-  };
+ 
 
   useEffect(() => {
     if (products && categories && subcategories) {
@@ -115,7 +112,6 @@ const ProductTable = () => {
             productWithNames.map((item: any) => (
               <tr
                 key={item.id}
-                onClick={() => handleRowClick(item)}
                 className="cursor:pointer"
               >
                 <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
