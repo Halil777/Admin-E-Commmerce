@@ -1,4 +1,9 @@
-import { HiLogin, HiUserGroup, HiOutlineX } from "react-icons/hi";
+import {
+  HiLogin,
+  HiUserGroup,
+  HiOutlineX,
+  HiOutlineUser,
+} from "react-icons/hi";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { HiOutlineTag } from "react-icons/hi";
 import { HiOutlineTruck } from "react-icons/hi";
@@ -138,15 +143,15 @@ const Sidebar = () => {
             <HiOutlineTruck className="text-lg" />
             <span className="text-sm">Orders</span>
           </NavLink>
-          {/* <NavLink
-            to="/users"
+          <NavLink
+            to="/admin/users"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
           >
             <HiOutlineUser className="text-lg" />
             <span className="text-sm">Users</span>
-          </NavLink> */}
+          </NavLink>
           <NavLink
             to="/admin/rules"
             className={(isActiveObj) =>

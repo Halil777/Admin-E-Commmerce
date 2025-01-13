@@ -10,13 +10,6 @@ interface NotRequiredDatasProps {
     old_price?: number;
     discount_percentage?: number;
     discounted_price?: number;
-    weight?: number;
-    width?: number;
-    height?: number;
-    depth?: number;
-    size?: string;
-    color?: string;
-    tags?: string;
   };
   errors: { [key: string]: string };
   onChange: (field: string, value: any) => void;
@@ -39,11 +32,7 @@ const NotRequiredDatas: FC<NotRequiredDatasProps> = ({
     if (
       field === "old_price" ||
       field === "discount_percentage" ||
-      field === "discounted_price" ||
-      field === "weight" ||
-      field === "width" ||
-      field === "height" ||
-      field === "depth"
+      field === "discounted_price"
     ) {
       updatedValue = value ? parseFloat(value) : 0;
       if (isNaN(updatedValue)) {
@@ -61,6 +50,7 @@ const NotRequiredDatas: FC<NotRequiredDatasProps> = ({
     }
     onChange(field, value);
   };
+
   const setErrors = (
     updater: (prevState: { [key: string]: string }) => { [key: string]: string }
   ) => {
@@ -68,7 +58,6 @@ const NotRequiredDatas: FC<NotRequiredDatasProps> = ({
     // This assumes your parent `CreateProduct` component passes the correct error update function
     // to NotRequiredDatas.
     // Here, you'll make changes to the `errors` state.
-    console.log(updater);
   };
   return (
     <div>
@@ -186,135 +175,6 @@ const NotRequiredDatas: FC<NotRequiredDatasProps> = ({
                 </p>
               )}
             </InputWithLabel>
-            {/* Dimensions & Size/Color/Tags Grid */}
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {/* Weight Input */}
-              <div>
-                <InputWithLabel label="Weight">
-                  <SimpleInput
-                    type="number"
-                    name="weight"
-                    placeholder="Enter product weight..."
-                    min="0"
-                    step="0.01"
-                    className={errors.weight ? "border-red-500" : ""}
-                    value={data.weight}
-                    onChange={(e) =>
-                      handleInputChange("weight", e.target.value)
-                    }
-                  />
-                </InputWithLabel>
-                {errors.weight && (
-                  <p className="text-red-500 text-sm">{errors.weight}</p>
-                )}
-              </div>
-              {/* Width Input */}
-              <div>
-                <InputWithLabel label="Width">
-                  <SimpleInput
-                    type="number"
-                    name="width"
-                    placeholder="Enter product width..."
-                    min="0"
-                    step="0.01"
-                    className={errors.width ? "border-red-500" : ""}
-                    value={data.width}
-                    onChange={(e) => handleInputChange("width", e.target.value)}
-                  />
-                </InputWithLabel>
-                {errors.width && (
-                  <p className="text-red-500 text-sm">{errors.width}</p>
-                )}
-              </div>
-              {/* Height Input */}
-              <div>
-                <InputWithLabel label="Height">
-                  <SimpleInput
-                    type="number"
-                    name="height"
-                    placeholder="Enter product height..."
-                    min="0"
-                    step="0.01"
-                    className={errors.height ? "border-red-500" : ""}
-                    value={data.height}
-                    onChange={(e) =>
-                      handleInputChange("height", e.target.value)
-                    }
-                  />
-                </InputWithLabel>
-                {errors.height && (
-                  <p className="text-red-500 text-sm">{errors.height}</p>
-                )}
-              </div>
-              {/* Depth Input */}
-              <div>
-                <InputWithLabel label="Depth">
-                  <SimpleInput
-                    type="number"
-                    name="depth"
-                    placeholder="Enter product depth..."
-                    min="0"
-                    step="0.01"
-                    className={errors.depth ? "border-red-500" : ""}
-                    value={data.depth}
-                    onChange={(e) => handleInputChange("depth", e.target.value)}
-                  />
-                </InputWithLabel>
-                {errors.depth && (
-                  <p className="text-red-500 text-sm">{errors.depth}</p>
-                )}
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {/* Size Input */}
-              <div>
-                <InputWithLabel label="Size">
-                  <SimpleInput
-                    type="text"
-                    name="size"
-                    placeholder="Product size..."
-                    className={errors.size ? "border-red-500" : ""}
-                    value={data.size || ""}
-                    onChange={(e) => handleInputChange("size", e.target.value)}
-                  />
-                </InputWithLabel>
-                {errors.size && (
-                  <p className="text-red-500 text-sm">{errors.size}</p>
-                )}
-              </div>
-              {/* Color Input */}
-              <div>
-                <InputWithLabel label="Color">
-                  <SimpleInput
-                    type="text"
-                    name="color"
-                    placeholder="Product color..."
-                    className={errors.color ? "border-red-500" : ""}
-                    value={data.color || ""}
-                    onChange={(e) => handleInputChange("color", e.target.value)}
-                  />
-                </InputWithLabel>
-                {errors.color && (
-                  <p className="text-red-500 text-sm">{errors.color}</p>
-                )}
-              </div>
-              {/* Tags Input */}
-              <div>
-                <InputWithLabel label="Tags">
-                  <SimpleInput
-                    type="text"
-                    name="tags"
-                    placeholder="Tags..."
-                    className={errors.tags ? "border-red-500" : ""}
-                    value={data.tags || ""}
-                    onChange={(e) => handleInputChange("tags", e.target.value)}
-                  />
-                </InputWithLabel>
-                {errors.tags && (
-                  <p className="text-red-500 text-sm">{errors.tags}</p>
-                )}
-              </div>
-            </div>
           </div>
         </>
       )}
