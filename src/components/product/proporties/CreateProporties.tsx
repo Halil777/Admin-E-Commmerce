@@ -36,6 +36,7 @@ const CreateProporties: FC<CreateProportiesProps> = ({ productId }) => {
     setProperties((prevProperties) =>
       prevProperties.map((property) => ({ ...property, product_id: productId }))
     );
+    console.log(errors);
   }, [productId]);
 
   const handlePropertyChange = (

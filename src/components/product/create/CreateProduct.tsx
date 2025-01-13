@@ -4,14 +4,11 @@ import ProductImageUpload from "./ProductImageUpload";
 import SelectCategories from "./SelectCategories";
 import Sidebar from "../../Sidebar";
 import { AiOutlineSave } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import NotRequiredDatas from "./NotRequiredDatas";
 import { BASE_URL } from "../../../api/base";
 import CreateProporties from "../proporties/CreateProporties";
 
 const CreateProduct: FC = () => {
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     title_tm: "",
     title_ru: "",
