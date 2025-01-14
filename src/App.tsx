@@ -12,7 +12,6 @@ import {
   EditUser,
   HelpDesk,
   HomeLayout,
-  Landing,
   Login,
   Notifications,
   Orders,
