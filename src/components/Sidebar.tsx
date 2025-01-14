@@ -72,7 +72,7 @@ const Sidebar = () => {
           )} */}
 
           <NavLink
-            to="/admin/products"
+            to="/admin"
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }

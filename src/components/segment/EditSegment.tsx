@@ -101,6 +101,11 @@ const EditSegment = () => {
       formData.append("file", inputObject.imageUrl);
     }
 
+    console.log("formData", formData);
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
     try {
       await updateSegment(segmentId!, formData);
       alert("Segment updated successfully!");
@@ -224,12 +229,16 @@ const EditSegment = () => {
                     <select
                       className="w-full py-2 px-4 border border-gray-300 rounded text-blackPrimary dark:text-whiteSecondary dark:bg-[#011936] bg-whiteSecondary"
                       value={inputObject.subcategory_id}
-                      onChange={(e) =>
-                        setInputObject({
+                      onChange={(e) => {
+                        setInputObject((prevInputObject) => ({
+                          ...prevInputObject,
+                          subcategory_id: e.target.value,
+                        }));
+                        console.log("inputObject after change", {
                           ...inputObject,
                           subcategory_id: e.target.value,
-                        })
-                      }
+                        });
+                      }}
                     >
                       <option value="">Select a Subcategory</option>
                       {subcategories.map((subcategory: any) => (

@@ -13,7 +13,6 @@ import {
   HelpDesk,
   HomeLayout,
   Landing,
-  LandingV2,
   Login,
   Notifications,
   Orders,
@@ -48,15 +47,14 @@ function App() {
         <Route path="" element={<Login />} />
         <Route path="/admin/register" element={<Register />} />
         <Route path="/admin" element={<HomeLayout />}>
-          <Route index element={<Landing />} />
-          <Route path="landing-v2" element={<LandingV2 />} />
+          <Route path="/admin" element={<Products />} />
           <Route path="banners" element={<Banner />} />
           <Route path="banners/create-banner" element={<CreateBanner />} />
           <Route path="banners/:bannerId" element={<EditBanner />} />
           <Route path="partners" element={<Partners />} />
           <Route path="partners/create-partner" element={<CreatePartner />} />
           <Route path="partners/:partnerId" element={<EditPartner />} />
-          <Route path="products" element={<Products />} />
+          {/* <Route path="products" element={<Products />} /> */}
           <Route path="rules" element={<Policy />} />
           <Route path="products/create-product" element={<CreateProduct />} />
           <Route path="products/:productId" element={<EditProduct />} />
