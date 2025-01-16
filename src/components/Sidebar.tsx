@@ -13,7 +13,7 @@ import { setSidebar } from "../features/dashboard/dashboardSlice";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
-import { FaHandshake } from "react-icons/fa"; // Import the handshake icon
+import { FaHandshake } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -25,9 +25,10 @@ const Sidebar = () => {
     : "sidebar-closed";
 
   const navActiveClass: string =
-    "block dark:bg-whiteSecondary flex items-center self-stretch gap-2 py-2 px-4 cursor-pointer max-xl:py-1 dark:text-blackPrimary bg-white text-blackPrimary text-sm";
+    "block flex items-center self-stretch gap-2 py-2 px-3 cursor-pointer max-xl:py-1 text-sm border border-blue-500 dark:text-red-400 text-red-600 dark:bg-blackPrimary my-1 mx-1 rounded";
+
   const navInactiveClass: string =
-    "block flex items-center self-stretch gap-2 py-2 px-4 dark:bg-blackPrimary dark:hover:bg-blackSecondary cursor-pointer max-xl:py-1 dark:text-whiteSecondary hover:bg-white text-blackPrimary bg-whiteSecondary text-sm";
+    "block flex items-center self-stretch gap-2 py-2 px-3 cursor-pointer max-xl:py-1 text-sm border dark:border-white/20 border-black/20 dark:text-whiteSecondary text-blackPrimary dark:hover:bg-blackSecondary hover:bg-gray-100 my-1 mx-1 rounded";
 
   return (
     <div className="relative shadow-2xl dark:shadow-3xl">
@@ -41,12 +42,13 @@ const Sidebar = () => {
         <div>
           <NavLink
             to="/admin"
+            end
             className={(isActiveObj) =>
               isActiveObj.isActive ? navActiveClass : navInactiveClass
             }
           >
             <HiOutlineDevicePhoneMobile className="text-lg" />
-            <span className="text-sm">Products</span>
+            <span className="text-sm">Продукты</span>
           </NavLink>
           <NavLink
             to="/admin/categories"
@@ -55,7 +57,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineTag className="text-lg" />
-            <span className="text-sm">Categories</span>
+            <span className="text-sm">Категории</span>
           </NavLink>
           <NavLink
             to="/admin/subcategories"
@@ -64,7 +66,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineTag className="text-lg" />
-            <span className="text-sm">Subcategories</span>
+            <span className="text-sm">Подкатегории</span>
           </NavLink>
           <NavLink
             to="/admin/segments"
@@ -73,7 +75,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineTruck className="text-lg" />
-            <span className="text-sm">Segments</span>
+            <span className="text-sm">Сегменты</span>
           </NavLink>
           <NavLink
             to="/admin/banners"
@@ -82,7 +84,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlinePhoto className="text-lg" />
-            <span className="text-sm">Banners</span>
+            <span className="text-sm">Баннеры</span>
           </NavLink>
           <NavLink
             to="/admin/partners"
@@ -91,7 +93,7 @@ const Sidebar = () => {
             }
           >
             <FaHandshake className="text-lg" />
-            <span className="text-sm">Partners</span>
+            <span className="text-sm">Партнеры</span>
           </NavLink>
           <NavLink
             to="/admin/brands"
@@ -100,7 +102,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineTag className="text-lg" />
-            <span className="text-sm">Brands</span>
+            <span className="text-sm">Бренды</span>
           </NavLink>
           <NavLink
             to="/admin/orders"
@@ -109,7 +111,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineTruck className="text-lg" />
-            <span className="text-sm">Orders</span>
+            <span className="text-sm">Заказы</span>
           </NavLink>
           <NavLink
             to="/admin/users"
@@ -118,7 +120,7 @@ const Sidebar = () => {
             }
           >
             <HiOutlineUser className="text-lg" />
-            <span className="text-sm">Users</span>
+            <span className="text-sm">Пользователи</span>
           </NavLink>
           <NavLink
             to="/admin/rules"
@@ -127,17 +129,17 @@ const Sidebar = () => {
             }
           >
             <MdPolicy className="text-lg" />
-            <span className="text-sm">Policy</span>
+            <span className="text-sm">Политика</span>
           </NavLink>
         </div>
 
         <div className="absolute bottom-0 border-1 border-t dark:border-blackSecondary border-blackSecondary w-full">
           <div
             onClick={() => setIsAuthOpen(() => !isAuthOpen)}
-            className="flex items-center self-stretch gap-2 py-2 px-4 dark:bg-blackPrimary dark:hover:bg-blackSecondary cursor-pointer max-xl:py-1 dark:text-whiteSecondary hover:bg-white text-blackPrimary bg-whiteSecondary text-sm"
+            className="flex items-center self-stretch gap-2 py-2 px-3 cursor-pointer max-xl:py-1 text-sm border dark:border-white/20 border-black/20 dark:text-whiteSecondary text-blackPrimary dark:hover:bg-blackSecondary hover:bg-gray-100 my-1 mx-1 rounded"
           >
             <HiUserGroup className="text-lg" />
-            <span className="text-sm">Auth</span>
+            <span className="text-sm">Авторизация</span>
           </div>
           {isAuthOpen && (
             <div className="ml-2">
@@ -148,7 +150,7 @@ const Sidebar = () => {
                 }
               >
                 <HiLogin className="text-lg" />
-                <span className="text-sm">Login</span>
+                <span className="text-sm">Войти</span>
               </NavLink>
               <NavLink
                 to="/admin/register"
@@ -157,7 +159,7 @@ const Sidebar = () => {
                 }
               >
                 <HiUserGroup className="text-lg" />
-                <span className="text-sm">Register</span>
+                <span className="text-sm">Регистрация</span>
               </NavLink>
             </div>
           )}

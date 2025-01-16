@@ -68,7 +68,7 @@ const SubcategoryTable = () => {
         <input
           type="text"
           placeholder="Search subcategories..."
-          className="w-full px-4 py-2 pl-3 dark:bg-blackSecondary bg-whitePrimary dark:text-whiteSecondary text-blackPrimary border dark:border-white/10 border-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+          className="w-full px-4 py-2 pl-3 dark:bg-blackSecondary bg-gray-200 dark:text-whiteSecondary text-blackPrimary border dark:border-white/10 border-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -76,7 +76,7 @@ const SubcategoryTable = () => {
           <HiOutlineSearch className="h-5 w-5 text-gray-500" />
         </div>
       </div>
-      <table className="mt-6 w-full whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
+      <table className="mt-6 w-full border dark:border-white/10 border-black/10  whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
         <colgroup>
           <col className="w-full sm:w-4/12" />
           <col className="lg:w-4/12" />
@@ -98,9 +98,7 @@ const SubcategoryTable = () => {
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Name RU
             </th>
-            <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
-              Description
-            </th>
+
             <th
               scope="col"
               className="py-2 pl-0 pr-4 text-right font-semibold table-cell sm:pr-6 lg:pr-8"
@@ -120,34 +118,33 @@ const SubcategoryTable = () => {
                       <LazyLoadImage
                         src={item.imageUrl}
                         alt={item.title_tm}
-                        className="w-10 h-10 rounded-full"
+                        className="w-22 h-10 "
+                        effect="blur"
                       />
                     ) : (
-                      <span className="text-sm text-gray-500">No Image</span>
+                      <span className="text-xs text-gray-500">No Image</span>
                     )}
-                    <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
+                    <div className="truncate text-xs font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
                       {item.title_tm.slice(0, 20)}...
                     </div>
                   </div>
                 </td>
                 <td className="py-4 pl-0 table-cell pr-8">
                   <div className="flex gap-x-3">
-                    <div className="text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
+                    <div className="text-xs leading-6 dark:text-whiteSecondary text-blackPrimary">
                       {item.title_en.slice(0, 20)}...
                     </div>
                   </div>
                 </td>
-                <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
+                <td className="py-4 pl-0 pr-4 text-xs leading-6 sm:pr-8 lg:pr-20">
                   <div className="flex items-center gap-x-2 justify-start">
                     <div className="dark:text-whiteSecondary text-blackPrimary block">
                       {item.title_ru.slice(0, 20)}...
                     </div>
                   </div>
                 </td>
-                <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell lg:pr-20">
-                  {item.desc_tm?.slice(0, 20)}...
-                </td>
-                <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
+
+                <td className="py-4 pl-0 text-right text-xs leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
                   <div className="flex gap-x-1 justify-end">
                     <Link
                       to={`/admin/subcategories/${item.id}`}

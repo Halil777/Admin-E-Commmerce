@@ -1,11 +1,17 @@
-import { useState, useEffect } from "react";
-import { Link,  } from "react-router-dom";
-import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
+import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import {
+  HiOutlinePencil,
+  HiOutlineSearch,
+  HiOutlineTrash,
+} from "react-icons/hi";
 import { useProduct } from "../../hooks/product/useProduct";
 import DeleteProduct from "./DeleteProduct";
 import TableSkeleton from "../common/TableSkeleton";
 import { useCategories } from "../../hooks/category/useCategory";
 import { useSubcategories } from "../../hooks/subcategory/useSubcategories";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const ProductTable = () => {
   const { products, isLoading, isError, deleteProduct } = useProduct();
@@ -16,6 +22,11 @@ const ProductTable = () => {
     null
   );
   const [productWithNames, setProductWithNames] = useState<any[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   const openModal = (productId: number) => {
     setSelectedProductId(productId);
@@ -33,16 +44,27 @@ const ProductTable = () => {
       closeModal();
     }
   };
- 
+
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm) {
+      return productWithNames;
+    }
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return productWithNames?.filter(
+      (item: any) =>
+        item.title_tm.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.categoryName.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.subcategoryName.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.brand?.title_en?.toLowerCase().includes(lowerCaseSearchTerm)
+    );
+  }, [productWithNames, searchTerm]);
 
   useEffect(() => {
     if (products && categories && subcategories) {
       const updatedProducts = products.map((product: any) => {
-        // Find category name based on category_id
         const category = categories.find(
           (cat: any) => cat.id === product.category_id
         );
-        // Find subcategory name based on subcategory id
         const subcategory = subcategories.find(
           (sub: any) => sub.id === product.subcategory
         );
@@ -66,14 +88,25 @@ const ProductTable = () => {
 
   return (
     <>
-      <table className="mt-6 w-full whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
+      <div className="relative my-4">
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="w-full px-4 py-2 pl-3 dark:bg-blackSecondary bg-gray-200 dark:text-whiteSecondary text-blackPrimary border dark:border-white/10 border-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+          <HiOutlineSearch className="h-5 w-5 text-gray-500" />
+        </div>
+      </div>
+      <table className="mt-6 w-full border dark:border-white/10 border-black/10  whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
         <colgroup>
           <col className="w-full sm:w-4/12" />
           <col className="lg:w-2/12" />
           <col className="lg:w-2/12" />
           <col className="lg:w-2/12" />
           <col className="lg:w-2/12" />
-          <col className="lg:w-1/12" />
           <col className="lg:w-1/12" />
         </colgroup>
         <thead className="border-b dark:border-white/10 border-black/10 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
@@ -93,9 +126,6 @@ const ProductTable = () => {
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Category
             </th>
-            {/* <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
-              Subcategory
-            </th> */}
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Brand
             </th>
@@ -108,25 +138,23 @@ const ProductTable = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
-          {Array.isArray(productWithNames) && productWithNames.length > 0 ? (
-            productWithNames.map((item: any) => (
-              <tr
-                key={item.id}
-                className="cursor:pointer"
-              >
+          {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
+            filteredProducts.map((item: any) => (
+              <tr key={item.id} className="cursor:pointer">
                 <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                   <div className="flex items-center gap-x-4">
                     {item.images?.[0] ? (
-                      <img
+                      <LazyLoadImage
                         src={item.images[0]}
                         alt={item.title_tm}
-                        className="w-10 h-10 rounded-full"
+                        className="w-10 h-10"
+                        effect="blur"
                       />
                     ) : (
                       <span className="text-sm text-gray-500">No Image</span>
                     )}
-                    <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
-                      {item.title_tm}
+                    <div className="truncate text-xs font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
+                      {item.title_tm.slice(0, 25)}...
                     </div>
                   </div>
                 </td>
@@ -137,10 +165,10 @@ const ProductTable = () => {
                   {item.price}m
                 </td>
                 <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                  {item.categoryName}
+                  {item.categoryName.slice(0, 15)}...
                 </td>
                 <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell">
-                  {item.brand?.title_en}
+                  {item.brand?.title_en.slice(0, 10)}...
                 </td>
                 <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
                   <div className="flex gap-x-1 justify-end">
@@ -163,14 +191,18 @@ const ProductTable = () => {
             ))
           ) : (
             <tr>
-              <td colSpan={7} className="text-center py-4">
+              <td colSpan={6} className="text-center py-4">
                 No products available.
               </td>
             </tr>
           )}
         </tbody>
       </table>
-
+      {!products?.length && (
+        <div className="bg-blue-200 dark:bg-dark rounded center-col my-2 p-2 h-20">
+          <p>Ничего не нашлось.</p>
+        </div>
+      )}
       <DeleteProduct
         isOpen={isModalOpen}
         onClose={closeModal}
