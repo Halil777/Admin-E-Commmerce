@@ -1,13 +1,13 @@
-import { Outlet } from "react-router-dom"
-import { Footer, Header } from "../components"
+import { Outlet } from "react-router-dom";
+import { Header } from "../components";
 
 const HomeLayout = () => {
   return (
     <>
-    <Header />
-    <Outlet />
-    <Footer />
+      <Header />
+      <Outlet />
+      {/* <Footer /> */}
     </>
-  )
-}
-export default HomeLayout
+  );
+};
+export default HomeLayout;

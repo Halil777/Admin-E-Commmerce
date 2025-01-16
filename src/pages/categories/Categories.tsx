@@ -7,11 +7,11 @@ const Categories = () => {
     <div className="h-auto border-t dark:border-blackSecondary border-blackSecondary border-1 flex dark:bg-blackPrimary bg-whiteSecondary">
       <Sidebar />
       <ScrollToTop />
-      <div className="dark:bg-blackPrimary bg-whiteSecondary w-full">
+      <div className="dark:bg-blackPrimary bg-whiteSecondary w-full px-4">
         <div className="dark:bg-blackPrimary bg-whiteSecondary py-6">
-          <div className="px-4 sm:px-6 lg:px-8 flex justify-between items-center max-sm:flex-col max-sm:gap-3">
+          <div className="  flex justify-between items-center max-sm:flex-col max-sm:gap-3">
             <div className="flex flex-col gap-1">
-              <h2 className="text-2xl font-bold leading-6 dark:text-whiteSecondary text-blackPrimary">
+              <h2 className="text-xl font-bold leading-6 dark:text-whiteSecondary text-blackPrimary">
                 Categories
               </h2>
             </div>
@@ -27,6 +27,8 @@ const Categories = () => {
               </WhiteButton>
             </div>
           </div>
+          {/* Search Input Container */}
+
           <CategoryTable />
         </div>
       </div>

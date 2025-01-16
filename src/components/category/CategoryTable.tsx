@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import { useCategories } from "../../hooks/category/useCategory";
@@ -12,6 +12,12 @@ const CategoryTable = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
   );
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   const openModal = (categoryId: number) => {
     setSelectedCategoryId(categoryId);
