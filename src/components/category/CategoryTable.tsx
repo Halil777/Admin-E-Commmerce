@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { HiOutlinePencil } from "react-icons/hi";
+import { HiOutlinePencil, HiOutlineSearch } from "react-icons/hi";
 import { HiOutlineTrash } from "react-icons/hi";
-import {} from "react-icons/hi";
 import { useCategories } from "../../hooks/category/useCategory";
 import DeleteCategory from "./DeleteCategory";
 import TableSkeleton from "../common/TableSkeleton";
@@ -14,6 +13,12 @@ const CategoryTable = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState<
     number | null | string
   >(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   const openModal = (categoryId: number) => {
     setSelectedCategoryId(categoryId);
@@ -32,6 +37,19 @@ const CategoryTable = () => {
     }
   };
 
+  const filteredCategories = useMemo(() => {
+    if (!searchTerm) {
+      return categories;
+    }
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return categories?.filter(
+      (item: any) =>
+        item.title_tm.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.title_en.toLowerCase().includes(lowerCaseSearchTerm) ||
+        item.title_ru.toLowerCase().includes(lowerCaseSearchTerm)
+    );
+  }, [categories, searchTerm]);
+
   if (isError)
     return (
       <div className="dark:text-whiteSecondary">
@@ -43,7 +61,19 @@ const CategoryTable = () => {
 
   return (
     <>
-      <table className="mt-6 w-full whitespace-nowrap text-left max-lg:block max-lg:overflow-x-scroll">
+      <div className="relative my-4">
+        <input
+          type="text"
+          placeholder="Search categories..."
+          className="w-full px-4 py-2 pl-3 dark:bg-blackSecondary  bg-whitePrimary  dark:text-whiteSecondary text-blackPrimary border dark:border-white/10 border-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+          <HiOutlineSearch className="h-5 w-5 text-gray-500" />
+        </div>
+      </div>
+      <table className="mt-2 border   dark:border-white/10 border-black/10  w-full  text-left max-lg:block max-lg:overflow-x-scroll">
         <colgroup>
           <col className="w-full sm:w-4/12" />
           <col className="lg:w-4/12" />
@@ -51,7 +81,7 @@ const CategoryTable = () => {
           <col className="lg:w-1/12" />
           <col className="lg:w-1/12" />
         </colgroup>
-        <thead className="border-b dark:border-white/10 border-black/10 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
+        <thead className="border-b border-t dark:border-white/10 border-black/10 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
           <tr>
             <th
               scope="col"
@@ -65,12 +95,7 @@ const CategoryTable = () => {
             <th scope="col" className="py-2 pl-0 pr-8 font-semibold table-cell">
               Name RU
             </th>
-            <th
-              scope="col"
-              className="py-2 pl-0 pr-8 font-semibold table-cell lg:pr-20"
-            >
-              Description
-            </th>
+
             <th
               scope="col"
               className="py-2 pl-0 pr-4 text-right font-semibold table-cell sm:pr-6 lg:pr-8"
@@ -80,52 +105,44 @@ const CategoryTable = () => {
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
-          {Array.isArray(categories) && categories.length > 0 ? (
-            categories.map((item: any) => (
-              <tr key={item.id}>
+          {Array.isArray(filteredCategories) &&
+          filteredCategories.length > 0 ? (
+            filteredCategories.map((item: any) => (
+              <tr
+                key={item.id}
+                className="border-b dark:border-white/10 border-black/10"
+              >
                 <td className="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
                   <div className="flex items-center gap-x-4">
                     {item.imageUrl ? (
-                      // <ReactImage // Using ReactImage component
-                      //   src={item.imageUrl}
-                      //   alt={item.title_tm}
-                      //   className="w-10 h-10 rounded-full"
-                      //   loader={
-                      //     <span className="w-10 h-10 rounded-full bg-gray-200" />
-                      //   }
-                      // />
                       <LazyLoadImage
                         alt={item.title_en}
-                        // height={image.height}
-                        src={item.imageUrl} // use normal <img> attributes as props
-                        // width={image.width}
-                        className="w-10 h-10 rounded-full"
+                        src={item.imageUrl}
+                        className="w-16 h-10 object-center rounded-sm"
                       />
                     ) : (
                       <span className="text-sm text-gray-500">No Image</span>
                     )}
-                    <div className="truncate text-sm font-medium leading-6 dark:text-whiteSecondary text-blackPrimary">
+                    <div className="truncate text-xs font-medium t leading-4 dark:text-whiteSecondary text-blackPrimary">
                       {item.title_tm}
                     </div>
                   </div>
                 </td>
                 <td className="py-4 pl-0 table-cell pr-8">
                   <div className="flex gap-x-3">
-                    <div className="text-sm leading-6 dark:text-whiteSecondary text-blackPrimary">
+                    <div className="text-xs leading-4 dark:text-whiteSecondary text-blackPrimary">
                       {item.title_en}
                     </div>
                   </div>
                 </td>
-                <td className="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
+                <td className="py-4 pl-0 pr-4 text-xs leading-4 sm:pr-8 lg:pr-20">
                   <div className="flex items-center gap-x-2 justify-start">
                     <div className="dark:text-whiteSecondary text-blackPrimary block">
                       {item.title_ru}
                     </div>
                   </div>
                 </td>
-                <td className="py-4 pl-0 pr-8 text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell lg:pr-20">
-                  {item.desc_tm}
-                </td>
+
                 <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
                   <div className="flex gap-x-1 justify-end">
                     <Link
