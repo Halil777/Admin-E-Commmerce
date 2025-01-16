@@ -41,9 +41,9 @@ const Header = () => {
           <Link to="/admin/profile">
             <div className="flex gap-2 items-center">
               <img
-                src="/src/assets/profile.jpg"
+                src="/images/alem-logo.png"
                 alt="profile"
-                className="rounded-full w-10 h-10"
+                className=" w-2xl h-10"
               />
               <div className="flex flex-col">
                 <p className="dark:text-whiteSecondary text-blackPrimary text-base max-xl:text-sm">
