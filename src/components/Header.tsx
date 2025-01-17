@@ -5,6 +5,9 @@ import { setSidebar } from "../features/dashboard/dashboardSlice";
 import { Link } from "react-router-dom";
 // import SearchInput from "./SearchInput";
 import { toggleDarkMode } from "../features/darkMode/darkModeSlice";
+import darkmodeLogo from "../assets/logos/footerLogo.svg";
+import lightmodeLogo from "../assets/logos/logo.svg";
+import companyLogo from "../assets/logos/alem-logo.png";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +22,9 @@ const Header = () => {
         />
         <Link to="/admin">
           {darkMode ? (
-            <img src="/images/footerLogo.svg" className="w-40" alt="" />
+            <img src={darkmodeLogo} className="w-40" alt="" />
           ) : (
-            <img src="/images/logo.svg" className="w-40" alt="" />
+            <img src={lightmodeLogo} className="w-40" alt="" />
           )}
           {/* <FaReact className="text-4xl dark:text-whiteSecondary text-blackPrimary hover:rotate-180 hover:duration-1000 hover:ease-in-out cursor-pointer" /> */}
         </Link>
@@ -44,11 +47,7 @@ const Header = () => {
           </Link> */}
           <Link to="/admin/">
             <div className="flex gap-2 items-center">
-              <img
-                src="/images/alem-logo.png"
-                alt="profile"
-                className=" w-2xl h-10"
-              />
+              <img src={companyLogo} alt="profile" className=" w-2xl h-10" />
             </div>
           </Link>
         </div>
