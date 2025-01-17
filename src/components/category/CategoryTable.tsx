@@ -143,7 +143,7 @@ const CategoryTable = () => {
                 <td className="py-4 pl-0 text-right text-sm leading-6 dark:text-whiteSecondary text-blackPrimary table-cell pr-6 lg:pr-8">
                   <div className="flex gap-x-1 justify-end">
                     <Link
-                      to={`/admin/subcategories/${item.id}`}
+                      to={`/admin/categories/${item.id}`}
                       state={{ category: item }}
                       className="dark:bg-blackPrimary bg-whiteSecondary dark:text-whiteSecondary text-blackPrimary border border-gray-600 w-8 h-8 flex justify-center items-center cursor-pointer hover:border-gray-400"
                     >

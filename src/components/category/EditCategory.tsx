@@ -1,5 +1,5 @@
 import { AiOutlineSave } from "react-icons/ai";
-import { InputWithLabel, Sidebar, SimpleInput, TextAreaInput } from "..";
+import { InputWithLabel, Sidebar, SimpleInput } from "..";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../api/base";
@@ -96,7 +96,7 @@ const EditCategory = () => {
       setError(error instanceof Error ? error.message : "An error occurred.");
     }
   };
-
+  console.log("edit category error" + error);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -109,14 +109,14 @@ const EditCategory = () => {
     <div className="h-auto border-t border-blackSecondary border-1 flex dark:bg-blackPrimary bg-whiteSecondary">
       <Sidebar />
       <div className="dark:bg-blackPrimary bg-whiteSecondary w-full">
-        <div className="dark:bg-blackPrimary bg-whiteSecondary py-10">
-          <div className="px-4 sm:px-6 lg:px-8 pb-8 border-b border-gray-800 flex justify-between items-center max-sm:flex-col max-sm:gap-5">
-            <h2 className="text-3xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
+        <div className="dark:bg-blackPrimary bg-whiteSecondary py-10 px-4 sm:px-6 lg:px-8">
+          <div className="px-4 sm:px-6 lg:px-8 pb-8  flex justify-between items-center max-sm:flex-col max-sm:gap-5">
+            <h2 className="text-2xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
               Edit Category
             </h2>
             <div className="flex gap-x-2">
               <button
-                className="dark:bg-blackPrimary bg-whiteSecondary border border-gray-600 w-48 py-2 text-lg dark:hover:border-gray-500 hover:border-gray-400 duration-200 flex items-center justify-center gap-x-2"
+                className="dark:bg-blackPrimary bg-whiteSecondary  w-48 py-2 text-lg dark:hover:border-gray-500 hover:border-gray-400 duration-200 flex items-center justify-center gap-x-2"
                 onClick={handleUpdate}
               >
                 <AiOutlineSave className="dark:text-whiteSecondary text-blackPrimary text-xl" />
@@ -126,131 +126,82 @@ const EditCategory = () => {
               </button>
             </div>
           </div>
-
-          {error && (
-            <div className="px-4 py-3 mb-4 bg-red-100 text-red-700 rounded">
-              {error}
-            </div>
-          )}
-
-          <div className="px-4 sm:px-6 lg:px-8 pb-8 pt-8 grid grid-cols-2 gap-x-10 max-xl:grid-cols-1 max-xl:gap-y-10">
-            <div>
-              <h3 className="text-2xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
-                Basic Information
-              </h3>
-              <div className="mt-4 flex flex-col gap-5">
-                <InputWithLabel label="Category Title (Turkmen)">
-                  <SimpleInput
-                    type="text"
-                    placeholder="Enter category title in Turkmen..."
-                    value={inputObject.title_tm}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        title_tm: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
-                <InputWithLabel label="Category Title (Russian)">
-                  <SimpleInput
-                    type="text"
-                    placeholder="Enter category title in Russian..."
-                    value={inputObject.title_ru}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        title_ru: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
-                <InputWithLabel label="Category Title (English)">
-                  <SimpleInput
-                    type="text"
-                    placeholder="Enter category title in English..."
-                    value={inputObject.title_en}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        title_en: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
-                <h3 className="text-2xl font-bold leading-3 dark:text-whiteSecondary text-blackPrimary mt-6">
-                  Category Image
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {inputObject.imageUrl ? (
-                    <img
-                      src={inputObject.imageUrl}
-                      alt="Category"
-                      className="w-full h-48 object-cover rounded"
-                    />
-                  ) : (
-                    <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded">
-                      <span>No Image Available</span>
-                    </div>
-                  )}
-                  <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    className="w-full py-2 px-4 border border-gray-300 rounded"
-                    onChange={(e) => {
-                      if (e.target.files && e.target.files[0]) {
-                        setSelectedFile(e.target.files[0]);
+          <div className="dark:bg-blackSecondary rounded-lg shadow:3xl bg-white rounded p-6 shadow">
+            <h3 className="text-lg font-semibold dark:text-whiteSecondary text-blackPrimary">
+              Основная информация
+            </h3>
+            <div className="px-4 sm:px-6 lg:px-8 pb-8 pt-8 grid grid-cols-2 gap-x-10 max-xl:grid-cols-1 max-xl:gap-y-10">
+              <div>
+                <div className="flex flex-col gap-3 lg:w-1/2">
+                  <InputWithLabel label="Название (TM)">
+                    <SimpleInput
+                      type="text"
+                      placeholder="Enter category title in Turkmen..."
+                      value={inputObject.title_tm}
+                      onChange={(e) =>
+                        setInputObject({
+                          ...inputObject,
+                          title_tm: e.target.value,
+                        })
                       }
-                    }}
-                  />
+                      className="w-full rounded"
+                    />
+                  </InputWithLabel>
+                  <InputWithLabel label="Category Title (Russian)">
+                    <SimpleInput
+                      type="text"
+                      placeholder="Enter category title in Russian..."
+                      value={inputObject.title_ru}
+                      onChange={(e) =>
+                        setInputObject({
+                          ...inputObject,
+                          title_ru: e.target.value,
+                        })
+                      }
+                    />
+                  </InputWithLabel>
+                  <InputWithLabel label="Category Title (English)">
+                    <SimpleInput
+                      type="text"
+                      placeholder="Enter category title in English..."
+                      value={inputObject.title_en}
+                      onChange={(e) =>
+                        setInputObject({
+                          ...inputObject,
+                          title_en: e.target.value,
+                        })
+                      }
+                    />
+                  </InputWithLabel>
                 </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold leading-7 dark:text-whiteSecondary text-blackPrimary">
-                Category Description
-              </h3>
-              <div className="mt-4 flex flex-col gap-3">
-                <InputWithLabel label="Description (Turkmen)">
-                  <TextAreaInput
-                    placeholder="Enter description in Turkmen..."
-                    rows={4}
-                    value={inputObject.desc_tm}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        desc_tm: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
-                <InputWithLabel label="Description (Russian)">
-                  <TextAreaInput
-                    placeholder="Enter description in Russian..."
-                    rows={4}
-                    value={inputObject.desc_ru}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        desc_ru: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
-                <InputWithLabel label="Description (English)">
-                  <TextAreaInput
-                    placeholder="Enter description in English..."
-                    rows={4}
-                    value={inputObject.desc_en}
-                    onChange={(e) =>
-                      setInputObject({
-                        ...inputObject,
-                        desc_en: e.target.value,
-                      })
-                    }
-                  />
-                </InputWithLabel>
+              <div>
+                <div className="mt-4 flex flex-col gap-3">
+                  <div className="flex flex-col gap-3">
+                    {inputObject.imageUrl ? (
+                      <img
+                        src={inputObject.imageUrl}
+                        alt="Category"
+                        className="w-full h-48 object-cover rounded"
+                      />
+                    ) : (
+                      <div className="w-full h-48 bg-gray-200 flex items-center justify-center rounded">
+                        <span>No Image Available</span>
+                      </div>
+                    )}
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      className="w-full py-2 px-4 border border-gray-300 rounded"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          setSelectedFile(e.target.files[0]);
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
